@@ -15,7 +15,8 @@ public class TODOListe {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Hovedvindue hovedvindue = new Hovedvindue();
+        hovedvindue.setVisible(true);
     }
     
 }
