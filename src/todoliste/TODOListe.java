@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package todoliste;
-
+package todoliste;  
 /**
  *
  * @author Benjamin
@@ -18,5 +17,6 @@ public class TODOListe {
         Hovedvindue hovedvindue = new Hovedvindue();
         hovedvindue.setVisible(true);
     }
+    
     
 }
