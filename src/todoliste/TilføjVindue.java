@@ -50,6 +50,11 @@ public class TilføjVindue extends javax.swing.JFrame {
         jLabel3.setText("Opgave titel");
 
         jTextField3.setText("jTextField3");
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Tilføj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +126,10 @@ public class TilføjVindue extends javax.swing.JFrame {
         TilføjVindue vindue = new TilføjVindue();
         vindue.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments
