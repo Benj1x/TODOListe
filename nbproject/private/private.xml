@@ -3,9 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< Updated upstream
             <file>file:/A:/Kodning%20Git/TODOListe/src/todoliste/TODOListe.java</file>
             <file>file:/A:/Kodning%20Git/TODOListe/src/todoliste/TilføjVindue.java</file>
             <file>file:/A:/Kodning%20Git/TODOListe/src/todoliste/JDBC.java</file>
+=======
+            <file>file:/C:/Users/olive/Documents/GitHub/TODOListe/src/todoliste/TODOListe.java</file>
+            <file>file:/C:/Users/olive/Documents/GitHub/TODOListe/src/todoliste/JDBC.java</file>
+            <file>file:/C:/Users/olive/Documents/GitHub/TODOListe/src/todoliste/TilføjVindue.java</file>
+            <file>file:/C:/Users/olive/Documents/GitHub/TODOListe/src/todoliste/add-document.png</file>
+            <file>file:/C:/Users/olive/Documents/GitHub/TODOListe/src/todoliste/Hovedvindue.java</file>
+>>>>>>> Stashed changes
         </group>
     </open-files>
 </project-private>
