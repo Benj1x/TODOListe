@@ -32,9 +32,12 @@ public class JDBC {
          Statement stmt = con.createStatement();
          ResultSet rs = stmt.executeQuery("select * from todolists");
          
+         String x = "";
          while(rs.next()){
+             x = rs.getString(1);
              System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7));
          }
+         System.out.println(x);
          con.close();     
      }
      
@@ -42,6 +45,7 @@ public class JDBC {
          System.out.println(e);
          e.printStackTrace();
      }
+     
     }
     public static void addTask(String day, String TaskName, String StartTime, String EndTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
@@ -58,19 +62,31 @@ public class JDBC {
               + "VALUE (" + "UserID Here" + "'" + day + "'" + StartTime + "'" + EndTime + "'");
        */
     }
-    public static void signIn() throws SQLException{
+    public static void signIn(String login) throws SQLException{
         //on user login get userID and save it for use in "userID" fields.
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        String x  = "email string";
-        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = " + x);
+        
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + login + "'");
+        
+        String userID = "";
+        String username = "";
+        String email = "";
+        String password = "";
+        while(rs.next()){
+             userID = rs.getString(1);
+             username = rs.getString(2);
+             email = rs.getString(3);
+             password = rs.getString(4);
+         }
+        System.out.println(userID + ", " + username + ", " + email + ", " + password);
         
         //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
     public static void SignUp(String username, String email, String password) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("INSERT INTO users (Username, Email, Password) VALUE ('" + "username" + "'" + "email" + "'" + "password" + "')");
+        ResultSet rs = stmt.executeQuery("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "'" + email + "'" + password + "')");
 
     }
 }
