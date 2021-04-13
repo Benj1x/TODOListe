@@ -7,6 +7,7 @@ package todoliste;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JButton;
 
 /**
  *
@@ -42,15 +43,22 @@ public class TilføjVindue extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        startTime.setText("8:00");
+        startTime.setText("8");
 
         jLabel1.setText("Start Tid:");
 
         jLabel2.setText("Slut Tid:");
 
-        endTime.setText("16:00");
+        endTime.setText("16");
 
         jLabel3.setText("Opgave titel");
+
+        taskName.setText("Opgave");
+        taskName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taskNameActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Tilføj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,20 +93,21 @@ public class TilføjVindue extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(startTime)
-                        .addComponent(endTime)
-                        .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(startTime)
+                    .addComponent(endTime)
+                    .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel4)))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel4)
-                .addGap(55, 55, 55)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -127,26 +136,37 @@ public class TilføjVindue extends javax.swing.JFrame {
         jLabel4.setText(dtf.format(timeNow));
     }
     
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-        JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+            JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
         }
         catch (Exception e){
-            
+            System.out.println("ERROR: COULD NOT ADD TASK TO DATABASE");
+       
         }
-        System.out.println(jLabel4.getText());
-        System.out.println(taskName.getText());
-        System.out.println(startTime.getText());
-        System.out.println(endTime.getText());
+       
         
-        //TODO: Lav logik til udregning af panels længde, hvor mange pixels der er per minut.
-        //TODO: Brug .split metoden, og divider herefter med 1440, altså minutter per dag.
+       
+        
+        System.out.println("DATE OF EVENT: "+jLabel4.getText());
+        System.out.println("TASK_NAME: "+taskName.getText());
+        System.out.println("START_TIME: "+startTime.getText());
+        System.out.println("END_TIME: "+endTime.getText());
+        
+        
+        
+        Hovedvindue.setTaskButton();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void taskNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_taskNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,14 +204,14 @@ public class TilføjVindue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField endTime;
+    public static javax.swing.JTextField endTime;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField startTime;
-    private javax.swing.JTextField taskName;
+    public javax.swing.JLabel jLabel4;
+    public static javax.swing.JTextField startTime;
+    public static javax.swing.JTextField taskName;
     // End of variables declaration//GEN-END:variables
 }
