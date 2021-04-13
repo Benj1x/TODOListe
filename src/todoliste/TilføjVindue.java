@@ -138,8 +138,9 @@ public class TilføjVindue extends javax.swing.JFrame {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //TODO: sanitize input forkert input er muligt, og vil ødelægge det
         try{
-            JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+            //JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
         }
         catch (Exception e){
             System.out.println("ERROR: COULD NOT ADD TASK TO DATABASE");
