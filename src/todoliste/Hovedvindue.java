@@ -8,9 +8,14 @@ package todoliste;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;    
 import java.util.ArrayList;
+import java.util.Calendar;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.JButton;
 
@@ -24,20 +29,30 @@ public class Hovedvindue extends javax.swing.JFrame {
     /**
      * Creates new form Hovedvindue
      */
+    private int dateTracker = 0;
+
+    
     public Hovedvindue() { 
 
         initComponents();
         //setTaskButton();
-        setDateText();
         
-
+        setDateText();
+       
     }
     
     public void setDateText(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timeNow = LocalDateTime.now();
         
-        jLabel4.setText(dtf.format(timeNow));
+        SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+        
+        
+        Calendar calendar = Calendar.getInstance();
+        //calendar.setTime(SDF.parse());
+        //calendar.add(Calendar.DATE, 1);
+        
+        jLabel4.setText(SDF.format(calendar.getTime()).toString());
     }
 
     
@@ -60,6 +75,8 @@ public class Hovedvindue extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -70,6 +87,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setMaximumSize(new java.awt.Dimension(22, 22));
 
@@ -96,6 +114,20 @@ public class Hovedvindue extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        jButton8.setText("->");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("<-");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -107,9 +139,13 @@ public class Hovedvindue extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(218, 218, 218)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                .addComponent(jButton9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addGap(175, 175, 175)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton8)
+                .addGap(92, 92, 92)
                 .addComponent(jLabel5)
                 .addGap(184, 184, 184)
                 .addComponent(jLabel2))
@@ -124,7 +160,9 @@ public class Hovedvindue extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jButton8)
+                    .addComponent(jButton9))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,6 +189,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         );
 
         jButton1.setBackground(new java.awt.Color(140, 140, 140));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/todoliste/add-task-button.png"))); // NOI18N
         jButton1.setText("Tilføj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,8 +227,8 @@ public class Hovedvindue extends javax.swing.JFrame {
                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -232,22 +271,33 @@ public class Hovedvindue extends javax.swing.JFrame {
         //TODO: LAV EN SLET FUNKTION
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
     
     
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        System.out.println(dateTracker);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+        calendar.add(Calendar.DATE, dateTracker++);
+        jLabel4.setText(SDF.format(calendar.getTime()).toString());
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        System.out.println(dateTracker);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+        calendar.add(Calendar.DATE, dateTracker--);
+        jLabel4.setText(SDF.format(calendar.getTime()).toString());
+    }//GEN-LAST:event_jButton9ActionPerformed
+    public static ArrayList<JButton> buttons = new ArrayList<>();
 
     public static void setTaskButton(){
         
-        //TODO: LAV SÅ AT TASKS HOPPER NED PÅ EN ANDEN Y-VÆRDI SÅ AT DE IKKE STÅR OVEN I HINANDEN
-        
-        ArrayList<JButton> buttons = new ArrayList<>();
-        
-        
-        //TilføjVindue tilføj = new TilføjVindue();
-        
         double getWindowPixel = jPanel2.getSize().width /1440;
-        //System.out.println(getWindowPixel);
+        System.out.println("PIXELS PER MINUTE: " + getWindowPixel);
+          
         
-
+        //TODO: CHECK OM KALENDEREN STEMMER OVERENS MED TASKENS TEXTFIELD
         
         
         /*
@@ -256,11 +306,12 @@ public class Hovedvindue extends javax.swing.JFrame {
         Herefter ganger jeg de antal minutter som blev fundet, med vores værdi for hvor mange pixels der er tilrådighed epr minut.
         Jeg omdanner den til en integer, for at vi kan indsætte den i en JButton.setBounds().
         */
-
+        //TilføjVindue.jTextField1.getText()
+        
+        
         double startTimeInMintues = Integer.parseInt(TilføjVindue.startTime.getText()) * 60;
         double startTimeInPixel = startTimeInMintues * 0.685;
         int m_startTimeInPixel = (int) startTimeInPixel;
-        //System.out.println(m_startTimeInPixel);
         
         
         double endTimeInMintues = Integer.parseInt(TilføjVindue.endTime.getText()) * 60;
@@ -271,9 +322,19 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         JButton button=new JButton(TilføjVindue.taskName.getText());
         buttons.add(button);
-        System.out.println(buttons.size());
-        button.setBounds(m_startTimeInPixel,100,m_getTimeBetween,30);
-        
+        int i = -1;
+
+        int element = buttons.size()-1;
+        i++;
+
+        if(buttons.get(i).getY()<=0){
+            button.setBounds(m_startTimeInPixel,100,m_getTimeBetween,35);
+        }
+        else{
+           int nextTaskY = buttons.get(i).getBounds().y + (45*element);
+           button.setBounds(m_startTimeInPixel,nextTaskY,m_getTimeBetween,35);
+           System.out.println(nextTaskY);
+        }
         
         jPanel2.add(button);
         
@@ -324,10 +385,12 @@ public class Hovedvindue extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel2;

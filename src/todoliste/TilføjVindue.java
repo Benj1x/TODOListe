@@ -41,7 +41,9 @@ public class TilføjVindue extends javax.swing.JFrame {
         taskName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+
+        setResizable(false);
 
         startTime.setText("8");
 
@@ -74,18 +76,12 @@ public class TilføjVindue extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("jLabel4");
+        jTextField1.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -96,18 +92,26 @@ public class TilføjVindue extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(startTime)
                     .addComponent(endTime)
-                    .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4)))
+                    .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(119, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(164, 164, 164))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel4)
-                .addGap(45, 45, 45)
+                .addGap(57, 57, 57)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -133,13 +137,14 @@ public class TilføjVindue extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timeNow = LocalDateTime.now();
         
-        jLabel4.setText(dtf.format(timeNow));
+        jTextField1.setText(dtf.format(timeNow));
     }
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //TODO: sanitize input forkert input er muligt, og vil ødelægge det
         try{
-            JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+            //JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
         }
         catch (Exception e){
             System.out.println("ERROR: COULD NOT ADD TASK TO DATABASE");
@@ -149,7 +154,7 @@ public class TilføjVindue extends javax.swing.JFrame {
         
        
         
-        System.out.println("DATE OF EVENT: "+jLabel4.getText());
+        System.out.println("DATE OF EVENT: "+jTextField1.getText());
         System.out.println("TASK_NAME: "+taskName.getText());
         System.out.println("START_TIME: "+startTime.getText());
         System.out.println("END_TIME: "+endTime.getText());
@@ -210,7 +215,7 @@ public class TilføjVindue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public javax.swing.JLabel jLabel4;
+    public static javax.swing.JTextField jTextField1;
     public static javax.swing.JTextField startTime;
     public static javax.swing.JTextField taskName;
     // End of variables declaration//GEN-END:variables
