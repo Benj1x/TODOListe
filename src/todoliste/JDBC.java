@@ -49,18 +49,18 @@ public class JDBC {
     }
     public static void addTask(String day, String TaskName, String StartTime, String EndTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
-       /*
+       
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
        
-       //This is commented out to avoid doing a shit load of adding to the database
+       
        ResultSet rs = stmt.executeQuery("INSERT INTO todolists (User_ID, Task_Name, Team_ID, Date, Begin_Time, End_Time) "
                + "VALUE (" + "UserID Here" + "'" + day + "'" + StartTime + "'" + EndTime + "'");
        
        //Need to handle doing it for a team too too
        System.out.println("INSERT INTO todolists (User_ID, Task_Name, Team_ID, Date, Begin_Time, End_Time) "
               + "VALUE (" + "UserID Here" + "'" + day + "'" + StartTime + "'" + EndTime + "'");
-       */
+       
     }
     public static void signIn(String login) throws SQLException{
         //on user login get userID and save it for use in "userID" fields.
