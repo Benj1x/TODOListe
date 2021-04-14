@@ -47,46 +47,111 @@ public class JDBC {
      }
      
     }
-    public static void addTask(String day, String TaskName, String StartTime, String EndTime) throws SQLException{
+    public static void addTask(String userID, String day, String taskName, String startTime, String endTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
-       
+       //This works rev 1
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
        
-       
-       ResultSet rs = stmt.executeQuery("INSERT INTO todolists (User_ID, Task_Name, Team_ID, Date, Begin_Time, End_Time) "
-               + "VALUE (" + "UserID Here" + "'" + day + "'" + StartTime + "'" + EndTime + "'");
-       
-       //Need to handle doing it for a team too too
-       System.out.println("INSERT INTO todolists (User_ID, Task_Name, Team_ID, Date, Begin_Time, End_Time) "
-              + "VALUE (" + "UserID Here" + "'" + day + "'" + StartTime + "'" + EndTime + "'");
+       stmt.executeUpdate("INSERT INTO todolists (User_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + userID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
        
     }
-    public static void signIn(String login) throws SQLException{
+    
+    public static void addTeamTask(String teamID, String day, String taskName, String startTime, String endTime) throws SQLException{
+       //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
+       //This works rev 1
+       Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+       Statement stmt = con.createStatement();
+       
+       stmt.executeUpdate("INSERT INTO todolists (Team_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + teamID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
+       
+    }
+ 
+    public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
         //on user login get userID and save it for use in "userID" fields.
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        
-        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + login + "'");
+        //This works, rev 1
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + loginEmail + "'");
         
         String userID = "";
         String username = "";
         String email = "";
         String password = "";
+        
         while(rs.next()){
              userID = rs.getString(1);
              username = rs.getString(2);
              email = rs.getString(3);
              password = rs.getString(4);
          }
-        System.out.println(userID + ", " + username + ", " + email + ", " + password);
         
+        if (loginPassword == password){
+            return true;
+        } else{
+            return false;
+        }
+       
         //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
-    public static void SignUp(String username, String email, String password) throws SQLException{
+    
+    public static void signUp(String username, String email, String password) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "'" + email + "'" + password + "')");
+        //This works rev 1
+        stmt.executeUpdate("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "', '" + email + "', '" + password + "')");
+
+    }
+    
+    public static void getTasks(String userID) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        
+        //This works rev 2
+        ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
+                + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + userID + "' AND todolists.User_ID= '" + userID + "'");
+
+        while(rs.next()){
+             System.out.println(rs.getString(1));
+             System.out.println(rs.getString(2));
+             System.out.println(rs.getString(3));
+             System.out.println(rs.getString(4));
+             System.out.println(rs.getString(5));
+         }
+        
+    }
+    
+    public static void getUserTeams(String userID) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        
+        //This works søg med bruger ID rev 2
+        ResultSet rs = stmt.executeQuery("SELECT users.username, relations.Relations_ID, relations.User_ID, relations.Team_ID, teams.Team_Name, teams.Team_ID "
+                + "FROM users, relations, teams WHERE users.User_ID='" + userID + "'AND relations.User_ID=users.User_ID AND teams.Team_ID=relations.Team_ID");
+        while(rs.next()){
+             System.out.println("Username: " + rs.getString(1));
+             System.out.println("Connection table ID: " + rs.getString(2));
+             System.out.println("UserID: " + rs.getString(3));
+             System.out.println("Team ID: " + rs.getString(4));
+             System.out.println("Team name: " + rs.getString(5));
+         }
+    }
+    
+    public static void getTeamTasks(String teamID) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+
+        //This works søger med teamID, rev2 da vi finder Teams ID i getUserTeams, kan denne query forkortes
+        ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name, todolists.Date, todolists.Begin_Time, todolists.End_Time "
+                + "FROM todolists WHERE todolists.Team_ID='" + teamID + "'");  
+        
+        while(rs.next()){
+             System.out.println("Task name: " + rs.getString(1));
+             System.out.println("Date: " + rs.getString(2));
+             System.out.println("Starting time: " + rs.getString(3));
+             System.out.println("End time: " + rs.getString(4));
+         }
+        
 
     }
 }
