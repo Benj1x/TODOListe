@@ -86,12 +86,14 @@ public class JDBC {
              password = rs.getString(4);
          }
         
-        if (loginPassword == password){
+        if (loginPassword.equals(password)){
+            System.out.println("Logget ind. På bruger: " + username);
             return true;
         } else{
+            System.out.println("Ikke logget ind.");
             return false;
         }
-       
+        
         //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
     
@@ -99,7 +101,25 @@ public class JDBC {
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         //This works rev 1
-        stmt.executeUpdate("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "', '" + email + "', '" + password + "')");
+        boolean userExists = false;
+        ResultSet rs = stmt.executeQuery("SELECT users.User_ID FROM users WHERE Email= '" + email + "'");
+        
+        //Før vi tilføjer en bruger til databasen tjekker vi om brugeren existere
+        //Vi tjekker ved at bruge en regex. "\\d" Tjeker efter et enkelt tal alt i mellem 0-9. Tal som 105 kommer altså ikke med 
+        //Vi bruger derfor "*" til at sige 0 eller flere gange, tal som 105 bliver altså læst korrket.
+        
+        while (rs.next()){
+        if (!rs.getString(1).matches("\\d*")){
+            userExists = false;
+            
+        } else {
+            userExists = true;
+        }
+        }
+        if (!userExists){
+            System.out.println("Denne email findes ikke, denne bruger blev lavet!");
+            stmt.executeUpdate("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "', '" + email + "', '" + password + "')");
+        } 
 
     }
     
@@ -154,5 +174,6 @@ public class JDBC {
         
 
     }
+    
 }
 
