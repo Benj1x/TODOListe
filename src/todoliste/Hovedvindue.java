@@ -38,7 +38,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         //setTaskButton();
         
         setDateText();
-       
+        
     }
     
     public void setDateText(){
@@ -90,6 +90,10 @@ public class Hovedvindue extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("To-Do Liste");
+        setBackground(new java.awt.Color(102, 102, 102));
+        setExtendedState(1);
+        setForeground(java.awt.Color.yellow);
         setResizable(false);
 
         jPanel3.setMaximumSize(new java.awt.Dimension(22, 22));
@@ -98,7 +102,7 @@ public class Hovedvindue extends javax.swing.JFrame {
 
         jLabel3.setText("0:00");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("29-03-2021");
 
@@ -153,7 +157,7 @@ public class Hovedvindue extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGap(218, 218, 218)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(jButton9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4))
@@ -212,7 +216,7 @@ public class Hovedvindue extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(365, 365, 365)
+                .addGap(389, 389, 389)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -308,22 +312,28 @@ public class Hovedvindue extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    
+    //Calendar calendar = Calendar.getInstance();
     
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        System.out.println(dateTracker);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
-        calendar.add(Calendar.DATE, dateTracker++);
-        jLabel4.setText(SDF.format(calendar.getTime()).toString());
+
+            System.out.println(dateTracker);
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, dateTracker++);
+            SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+            //calendar.add(Calendar.DATE, dateTracker++);
+            jLabel4.setText(SDF.format(calendar.getTime()).toString());
+
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        System.out.println(dateTracker);
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
-        calendar.add(Calendar.DATE, dateTracker--);
-        jLabel4.setText(SDF.format(calendar.getTime()).toString());
+
+            System.out.println(dateTracker);
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, dateTracker--);
+            SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
+            //calendar.add(Calendar.DATE, dateTracker--);
+            jLabel4.setText(SDF.format(calendar.getTime()).toString());  
+        
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -411,7 +421,7 @@ public class Hovedvindue extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Hovedvindue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+            
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

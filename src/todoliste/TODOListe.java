@@ -20,6 +20,7 @@ public class TODOListe {
         Hovedvindue hovedvindue = new Hovedvindue();
         hovedvindue.setVisible(true);
         
+        
         JDBC.main();
     }
     
