@@ -17,9 +17,11 @@ public class TODOListe {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        Hovedvindue hovedvindue = new Hovedvindue();
-        hovedvindue.setVisible(true);
+        //Hovedvindue hovedvindue = new Hovedvindue();
+        //hovedvindue.setVisible(true);
         
+        LoginVindue loginvindue = new LoginVindue();
+        loginvindue.setVisible(true);
         
         JDBC.main();
     }

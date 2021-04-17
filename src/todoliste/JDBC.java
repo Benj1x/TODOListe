@@ -97,6 +97,48 @@ public class JDBC {
         //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
     
+    public static String getUserDetails(String loginEmail) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + loginEmail + "'");
+        
+        
+        String userID = "";
+        String username = "";
+        String email = "";
+        String password = "";
+        
+        while(rs.next()){
+             userID = rs.getString(1);
+             username = rs.getString(2);
+             email = rs.getString(3);
+             password = rs.getString(4);
+         }  
+        return username;
+    }
+    
+    public static String getUserID(String loginEmail) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+ 
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + loginEmail + "'");
+        
+        
+        String userID = "";
+        String username = "";
+        String email = "";
+        String password = "";
+        
+        while(rs.next()){
+             userID = rs.getString(1);
+             username = rs.getString(2);
+             email = rs.getString(3);
+             password = rs.getString(4);
+         }  
+        return userID;
+    }
+    
     public static void signUp(String username, String email, String password) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();

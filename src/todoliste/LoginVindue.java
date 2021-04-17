@@ -11,9 +11,8 @@ package todoliste;
  */
 public class LoginVindue extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LoginVindue
-     */
+    public static String emailFieldText;
+    
     public LoginVindue() {
         initComponents();
     }
@@ -111,7 +110,16 @@ public class LoginVindue extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try{
-            JDBC.signIn(emailField.getText(), jPasswordField1.getText());
+            if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
+                emailFieldText = emailField.getText();
+                Hovedvindue hovedvindue = new Hovedvindue();
+                hovedvindue.setVisible(true);
+                this.dispose();
+            }
+            else{
+                System.out.println("UNABLE TO LOG USER IN");
+            }
+            
             //JDBC.signIn(emailField.getText());
             //System.out.println(JDBC.password);
         }
@@ -123,7 +131,9 @@ public class LoginVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        System.out.print("Registrering Igangsat!");
+        RegistrerVindue registrervindue = new RegistrerVindue();
+        registrervindue.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
