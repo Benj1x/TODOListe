@@ -109,23 +109,32 @@ public class LoginVindue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-            if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
-                emailFieldText = emailField.getText();
-                Hovedvindue hovedvindue = new Hovedvindue();
-                hovedvindue.setVisible(true);
-                this.dispose();
-            }
-            else{
+//        En simpel regex til at verificere emails, emailen skal indholde mindst et punktum, og alt efter det sidste punktum skal være et bogstaver
+//        Email må gerne indholde store og små bogstaver, tal (emails kan indeholde IP'er efter @ i stedet for etc studiobeans.dk)
+//        Email må også indeholde punktum, bindestreg og underscore
+//        Password må indeholde alle latniske bogstaver + danske. (Skulle være jævnt sikkert overfor SQL Injection, men er dog ikke ekspert lmao)
+        if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
+                && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
+            try{
+                if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
+                    emailFieldText = emailField.getText();
+                    Hovedvindue hovedvindue = new Hovedvindue();
+                    hovedvindue.setVisible(true);
+                    this.dispose();
+                }
+                else{
                 System.out.println("UNABLE TO LOG USER IN");
-            }
-            
+                }
             //JDBC.signIn(emailField.getText());
             //System.out.println(JDBC.password);
+            }
+            catch(Exception e){
+                System.out.print("Exception i Login Vinduet");
+                e.printStackTrace();
+            }
         }
-        catch(Exception e){
-            System.out.print("Exception i Login Vinduet");
-            e.printStackTrace();
+        else{
+            //Ugyldigt bruger navn eller password
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed

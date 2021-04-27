@@ -20,6 +20,8 @@ import java.sql.SQLException;
     //https://lucid.app/lucidchart/e53e4a47-b977-4c5a-a9ac-bafe41dcdf88/edit?beaconFlowId=F42B643A674C6E9F&page=0_0#
 
 public class JDBC {
+    public static String GlobalUserID;
+    
     public static void main() throws SQLException{
         String Query = "SELECT  * FROM users";
         
@@ -37,6 +39,7 @@ public class JDBC {
              x = rs.getString(1);
              System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7));
          }
+         
          System.out.println(x);
          con.close();     
      }
@@ -47,11 +50,12 @@ public class JDBC {
      }
      
     }
-    public static void addTask(String userID, String day, String taskName, String startTime, String endTime) throws SQLException{
+    public static void addTask(String day, String taskName, String startTime, String endTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
        //This works rev 1
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
+       String userID = JDBC.GlobalUserID;
        
        stmt.executeUpdate("INSERT INTO todolists (User_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + userID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
        
@@ -85,9 +89,9 @@ public class JDBC {
              email = rs.getString(3);
              password = rs.getString(4);
          }
-        
+        JDBC.GlobalUserID = userID;
         if (loginPassword.equals(password)){
-            System.out.println("Logget ind. På bruger: " + username);
+            System.out.println("Logget ind på bruger: " + username);
             return true;
         } else{
             System.out.println("Ikke logget ind.");
@@ -168,7 +172,7 @@ public class JDBC {
     public static void getTasks(String userID) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        
+       
         //This works rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
                 + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + userID + "' AND todolists.User_ID= '" + userID + "'");
