@@ -109,8 +109,17 @@ public class LoginVindue extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //\\p{L}*
+        //Regex til at verificere emails, emailen skal indholde mindst et punktum, og alt efter det sidste punktum skal være et bogstaver 2-6 max
+        //der kan ikke være to punktummer lige efter hindanden, det første og det sidste tegn må ikke være punktum.
+        //Email må gerne indholde store og små bogstaver, tal https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
+        if (emailField.getText().matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")){
+            System.out.println(emailField.getText());
+        } else{
+            System.out.println("Wrong: " + emailField.getText());
+        }
         try{
-            if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
+         /*   if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
                 emailFieldText = emailField.getText();
                 Hovedvindue hovedvindue = new Hovedvindue();
                 hovedvindue.setVisible(true);
@@ -119,7 +128,7 @@ public class LoginVindue extends javax.swing.JFrame {
             else{
                 System.out.println("UNABLE TO LOG USER IN");
             }
-            
+          */  
             //JDBC.signIn(emailField.getText());
             //System.out.println(JDBC.password);
         }

@@ -136,8 +136,11 @@ public class RegistrerVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jTextField1.getText().matches("\\^[A-Za-z0-9+_.-]+@(.+)$")){
+            System.out.println(jTextField1);
+        }
         try{
-            JDBC.signUp(jTextField1.getText(), emailField.getText(), jPasswordField1.getText());
+            //JDBC.signUp(jTextField1.getText(), emailField.getText(), jPasswordField1.getText());
         }
         catch(Exception e){
             System.out.println("FEJL I REGISTERINGEN AF BRUGERE");
