@@ -50,13 +50,8 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         try{           
                 for (Object i : JDBC.getUserTeams(JDBC.GlobalUserID).keySet()) {
-                    jComboBox1.addItem(JDBC.getUserTeams(JDBC.GlobalUserID).get(i).toString());
-                    //System.out.println(JDBC.getUserTeams(JDBC.GlobalUserID).values());
-                    //System.out.println("Name: " + i + " Age: " + JDBC.getUserTeams(JDBC.GlobalUserID).get(i));
+                    jComboBox1.addItem(JDBC.getUserTeams(JDBC.GlobalUserID).get(i).toString() + ", " + i);
                 }   
-                    //System.out.println("")
-                 
-              
         }
         catch(Exception e){
             //System.out.println("Something went wrong when adding teams to the combobox");
@@ -80,6 +75,12 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         jLabel4.setText(SDF.format(calendar.getTime()).toString());
     }
+    
+    public void checkTaskDates(){
+    
+    
+    }
+
 
     
 
@@ -100,18 +101,17 @@ public class Hovedvindue extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         usernameLbl = new javax.swing.JLabel();
         jButton10 = new javax.swing.JButton();
 
@@ -135,17 +135,6 @@ public class Hovedvindue extends javax.swing.JFrame {
         jLabel1.setText("6:00");
 
         jLabel5.setText("18:00");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 216, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/todoliste/calendar-arrow-right.png"))); // NOI18N
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +165,16 @@ public class Hovedvindue extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/todoliste/trash-task-button.png"))); // NOI18N
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setPreferredSize(new java.awt.Dimension(33, 33));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -192,43 +191,44 @@ public class Hovedvindue extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 506, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120)
+                        .addGap(126, 126, 126)
                         .addComponent(jLabel5)
                         .addGap(184, 184, 184)
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(9, 9, 9)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
                         .addComponent(jLabel1)
                         .addComponent(jLabel5)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(117, 117, 117))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -259,13 +259,6 @@ public class Hovedvindue extends javax.swing.JFrame {
 
         jButton7.setText("jButton3");
 
-        jButton2.setText("Slet");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         usernameLbl.setText("userName");
         usernameLbl.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -292,17 +285,18 @@ public class Hovedvindue extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                        .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(usernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -316,9 +310,7 @@ public class Hovedvindue extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(usernameLbl)
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(85, 85, 85)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -385,7 +377,7 @@ public class Hovedvindue extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         try{
-            System.out.println(JDBC.getUserTeams(JDBC.GlobalUserID).get(jComboBox1.getSelectedIndex()-1));
+            String[] arrOfComboBox = jComboBox1.getSelectedItem().toString().split(", ");
         }
         catch(Exception e){
             e.getStackTrace();
@@ -396,10 +388,17 @@ public class Hovedvindue extends javax.swing.JFrame {
 
     public static void setTaskButton(){
         
-        double getWindowPixel = jPanel2.getSize().width /1440;
-        System.out.println("PIXELS PER MINUTE: " + getWindowPixel);
-          
+        if(jComboBox1.getSelectedItem() == "Min liste"){
+            try{
+                JDBC.getTasks(JDBC.GlobalUserID);
+            }
+            catch(Exception e){
+                e.getStackTrace();
+            }
+            
+        }
         
+          
         //TODO: CHECK OM KALENDEREN STEMMER OVERENS MED TASKENS TEXTFIELD
         
         
@@ -411,22 +410,61 @@ public class Hovedvindue extends javax.swing.JFrame {
         */
         //TilføjVindue.jTextField1.getText()
         
+        
         String[] arrOfStartTime = TilføjVindue.startTime.getText().split(":");
+        String StartTime = "";
         
-        if(arrOfStartTime[0].contains("0")){
-            System.out.println("Contains a zero, split again");
+        String[] HourStartTime = arrOfStartTime[0].split("");
+        if(HourStartTime[0].contains("0")){
+            StartTime = HourStartTime[1];
         }
-        if(arrOfStartTime[1].contains("0")){
-            System.out.println("It contains a zero, now plaese split it");
+        if(HourStartTime[0].contains("1") || HourStartTime[0].contains("2")){
+            StartTime = HourStartTime[0] + HourStartTime[1];
         }
         
-        double startTimeInMintues = Integer.parseInt(TilføjVindue.startTime.getText()) * 60;
-        double startTimeInPixel = startTimeInMintues * 0.685;
+        String[] MinuteStartTime = arrOfStartTime[1].split("");
+        String MinuteStart = "";
+        if(MinuteStartTime[0].contains("0")){
+            MinuteStart = MinuteStartTime[1];
+        }
+        if(MinuteStartTime[0].contains("1") || MinuteStartTime[0].contains("2") || MinuteStartTime[0].contains("3") || MinuteStartTime[0].contains("4") || MinuteStartTime[0].contains("5") || MinuteStartTime[0].contains("6")){
+            MinuteStart = MinuteStartTime[0] + MinuteStartTime[1];
+        }
+        
+
+        
+        double startTimeInMintues = Integer.parseInt(StartTime) * 60;
+        double stringToMinutes = Integer.parseInt(MinuteStart);
+        double HoursAndMinutes = startTimeInMintues + stringToMinutes;
+        //System.out.println(HoursAndMinutes);
+        double startTimeInPixel = HoursAndMinutes * 0.685;
         int m_startTimeInPixel = (int) startTimeInPixel;
         
+        String[] arrOfEndTime = TilføjVindue.endTime.getText().split(":");
+        String EndTime = "";
         
-        double endTimeInMintues = Integer.parseInt(TilføjVindue.endTime.getText()) * 60;
-        double endTimeInPixel = endTimeInMintues * 0.685;
+        String[] HourEndTime = arrOfEndTime[0].split("");
+        if(HourEndTime[0].contains("0")){
+            EndTime = HourEndTime[1];
+        }
+        if(HourEndTime[0].contains("1") || HourEndTime[0].contains("2")){
+            EndTime = HourEndTime[0] + HourEndTime[1];
+        }
+        
+        String[] MinuteEndTime = arrOfEndTime[1].split("");
+        String MinuteEnd = "";
+        if(MinuteEndTime[0].contains("0")){
+            MinuteEnd = MinuteEndTime[1];
+        }
+        if(MinuteEndTime[0].contains("1") || MinuteEndTime[0].contains("2") || MinuteEndTime[0].contains("3") || MinuteEndTime[0].contains("4") || MinuteEndTime[0].contains("5") || MinuteEndTime[0].contains("6")){
+            MinuteEnd = MinuteEndTime[0] + MinuteEndTime[1];
+        }
+        
+        double endTimeInMintues = Integer.parseInt(EndTime) * 60;
+        double stringToM = Integer.parseInt(MinuteEnd);
+        double HoursAndMinutesEnd = endTimeInMintues + stringToM;
+        System.out.println(HoursAndMinutesEnd);
+        double endTimeInPixel = HoursAndMinutesEnd * 0.685;
         double getTimeBetween = endTimeInPixel - startTimeInPixel;
         int m_getTimeBetween = (int) getTimeBetween;
 
@@ -502,13 +540,12 @@ public class Hovedvindue extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private static javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private static javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     public static javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;

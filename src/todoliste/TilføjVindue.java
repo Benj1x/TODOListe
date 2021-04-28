@@ -153,12 +153,12 @@ public class TilføjVindue extends javax.swing.JFrame {
        
         
        
-        
+        /*
         System.out.println("DATE OF EVENT: "+jTextField1.getText());
         System.out.println("TASK_NAME: "+taskName.getText());
         System.out.println("START_TIME: "+startTime.getText());
         System.out.println("END_TIME: "+endTime.getText());
-        
+        */
         
         
         Hovedvindue.setTaskButton();
