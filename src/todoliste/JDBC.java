@@ -92,6 +92,7 @@ public class JDBC {
              password = rs.getString(4);
          }
         JDBC.GlobalUserID = userID;
+        JDBC.hasInvite(userID);
         if (loginPassword.equals(password)){
             System.out.println("Logget ind på bruger: " + username);
             return true;
@@ -99,6 +100,7 @@ public class JDBC {
             System.out.println("Ikke logget ind.");
             return false;
         }
+        
         
         //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
@@ -178,7 +180,8 @@ public class JDBC {
         //This works rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
                 + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + userID + "' AND todolists.User_ID= '" + userID + "'");
-
+        
+        
         while(rs.next()){
              System.out.println(rs.getString(1));
              System.out.println(rs.getString(2));
@@ -228,6 +231,39 @@ public class JDBC {
          }
         
 
+    }
+    //Kaldes på login og igen når invitaioner accepteres
+    public static boolean hasInvite(String userID) throws SQLException{
+        //String userID = "";
+        //JDBC.GlobalUserID = userID;
+       
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '" + userID + "'");  
+        //ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '" + userID + "'");
+        System.out.println();
+        while(rs.next()){
+             System.out.println("Invite ID: " + rs.getString(1));
+             System.out.println("User ID: " + rs.getString(2));
+             System.out.println("Team ID: " + rs.getString(3));
+         }
+        if(rs.isAfterLast()){
+            System.out.println("Works");
+            return true;
+        } else {
+            System.out.println("oops");
+            return false;
+        }
+        
+    }
+    public static String GetInvites() throws SQLException{
+        String userID = "";
+        JDBC.GlobalUserID = userID;
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '2'"); 
+        
+        return "";
     }
     
 }
