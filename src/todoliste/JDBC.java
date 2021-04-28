@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -187,20 +189,27 @@ public class JDBC {
         
     }
     
-    public static void getUserTeams(String userID) throws SQLException{
+    public static HashMap getUserTeams(String userID) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         
         //This works søg med bruger ID rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.username, relations.Relations_ID, relations.User_ID, relations.Team_ID, teams.Team_Name, teams.Team_ID "
                 + "FROM users, relations, teams WHERE users.User_ID='" + userID + "'AND relations.User_ID=users.User_ID AND teams.Team_ID=relations.Team_ID");
+        
+         HashMap<String, String> TeamInfo = new HashMap<String, String>();
+
+        
         while(rs.next()){
-             System.out.println("Username: " + rs.getString(1));
-             System.out.println("Connection table ID: " + rs.getString(2));
-             System.out.println("UserID: " + rs.getString(3));
-             System.out.println("Team ID: " + rs.getString(4));
-             System.out.println("Team name: " + rs.getString(5));
-         }
+             //System.out.println("Username: " + rs.getString(1));
+             //System.out.println("Connection table ID: " + rs.getString(2));
+             //System.out.println("UserID: " + rs.getString(3));
+             //System.out.println("Team ID: " + rs.getString(4));
+             TeamInfo.put(rs.getString(4),rs.getString(5));
+             
+         
+        }
+       return TeamInfo;
     }
     
     public static void getTeamTasks(String teamID) throws SQLException{

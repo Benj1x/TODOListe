@@ -40,6 +40,31 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         setDateText();
         
+        AddToComboBox();
+        
+        
+    }
+    
+    private void AddToComboBox(){
+        jComboBox1.addItem("Min liste");
+        
+        try{           
+                for (Object i : JDBC.getUserTeams(JDBC.GlobalUserID).keySet()) {
+                    jComboBox1.addItem(JDBC.getUserTeams(JDBC.GlobalUserID).get(i).toString());
+                    //System.out.println(JDBC.getUserTeams(JDBC.GlobalUserID).values());
+                    //System.out.println("Name: " + i + " Age: " + JDBC.getUserTeams(JDBC.GlobalUserID).get(i));
+                }   
+                    //System.out.println("")
+                 
+              
+        }
+        catch(Exception e){
+            //System.out.println("Something went wrong when adding teams to the combobox");
+            e.getStackTrace();
+        }
+        
+        
+        
     }
     
     public void setDateText(){
@@ -136,7 +161,6 @@ public class Hovedvindue extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -191,14 +215,15 @@ public class Hovedvindue extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(9, 9, 9)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5)
-                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel5)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,17 +374,6 @@ public class Hovedvindue extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_usernameLblAncestorAdded
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        try{
-            JDBC.getUserTeams(JDBC.getUserDetails((JDBC.getUserDetails(LoginVindue.emailFieldText))));
-        }
-        catch(Exception e){
-            System.out.println("FAILED TO FIND USER TEAMS");
-            e.getStackTrace();
-        }
-       
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, dateTracker--);
@@ -368,6 +382,16 @@ public class Hovedvindue extends javax.swing.JFrame {
         jLabel4.setText(SDF.format(calendar.getTime()).toString());
 
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        try{
+            System.out.println(JDBC.getUserTeams(JDBC.GlobalUserID).get(jComboBox1.getSelectedIndex()-1));
+        }
+        catch(Exception e){
+            e.getStackTrace();
+        }
+        
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     public static ArrayList<JButton> buttons = new ArrayList<>();
 
     public static void setTaskButton(){
@@ -387,6 +411,14 @@ public class Hovedvindue extends javax.swing.JFrame {
         */
         //TilføjVindue.jTextField1.getText()
         
+        String[] arrOfStartTime = TilføjVindue.startTime.getText().split(":");
+        
+        if(arrOfStartTime[0].contains("0")){
+            System.out.println("Contains a zero, split again");
+        }
+        if(arrOfStartTime[1].contains("0")){
+            System.out.println("It contains a zero, now plaese split it");
+        }
         
         double startTimeInMintues = Integer.parseInt(TilføjVindue.startTime.getText()) * 60;
         double startTimeInPixel = startTimeInMintues * 0.685;
