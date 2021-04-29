@@ -23,9 +23,8 @@ import java.util.HashMap;
 
 public class JDBC {
     public static String GlobalUserID;
-    
+    public static ArrayList<String> inviteIDs = new ArrayList<String>();
     public static void main() throws SQLException{
-        String Query = "SELECT  * FROM users";
         
      try{
          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -33,16 +32,7 @@ public class JDBC {
          //username og password til min PHPAdmin host, plz don't haxor me
          Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
          
-         Statement stmt = con.createStatement();
-         ResultSet rs = stmt.executeQuery("select * from todolists");
-         
-         String x = "";
-         while(rs.next()){
-             x = rs.getString(1);
-             System.out.println(rs.getInt(1)+" "+rs.getString(2)+" "+rs.getString(3)+" "+rs.getString(4)+" "+rs.getString(5)+" "+rs.getString(6)+" "+rs.getString(7));
-         }
-         
-         System.out.println(x);
+         System.out.println("JDBC er live");
          con.close();     
      }
      
@@ -60,7 +50,8 @@ public class JDBC {
        String userID = JDBC.GlobalUserID;
        
        stmt.executeUpdate("INSERT INTO todolists (User_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + userID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
-       
+       con.close(); 
+       stmt.close();
     }
     
     public static void addTeamTask(String teamID, String day, String taskName, String startTime, String endTime) throws SQLException{
@@ -71,6 +62,8 @@ public class JDBC {
        
        stmt.executeUpdate("INSERT INTO todolists (Team_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + teamID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
        
+       con.close(); 
+       stmt.close();
     }
  
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
@@ -95,9 +88,13 @@ public class JDBC {
         JDBC.hasInvite(userID);
         if (loginPassword.equals(password)){
             System.out.println("Logget ind på bruger: " + username);
+            con.close(); 
+            stmt.close();
             return true;
         } else{
             System.out.println("Ikke logget ind.");
+            con.close(); 
+            stmt.close();
             return false;
         }
         
@@ -123,6 +120,8 @@ public class JDBC {
              email = rs.getString(3);
              password = rs.getString(4);
          }  
+        con.close(); 
+        stmt.close();
         return username;
     }
     
@@ -144,6 +143,8 @@ public class JDBC {
              email = rs.getString(3);
              password = rs.getString(4);
          }  
+        con.close(); 
+        stmt.close();
         return userID;
     }
     
@@ -170,6 +171,8 @@ public class JDBC {
             System.out.println("Denne email findes ikke, denne bruger blev lavet!");
             stmt.executeUpdate("INSERT INTO users (Username, Email, Password) VALUE ('" + username + "', '" + email + "', '" + password + "')");
         } 
+        con.close(); 
+        stmt.close();
 
     }
     
@@ -189,7 +192,8 @@ public class JDBC {
              System.out.println(rs.getString(4));
              System.out.println(rs.getString(5));
          }
-        
+        con.close(); 
+        stmt.close();
     }
     
     public static HashMap getUserTeams(String userID) throws SQLException{
@@ -212,6 +216,8 @@ public class JDBC {
              
          
         }
+       con.close(); 
+       stmt.close();
        return TeamInfo;
     }
     
@@ -230,38 +236,51 @@ public class JDBC {
              System.out.println("End time: " + rs.getString(4));
          }
         
-
+        con.close(); 
+        stmt.close();
     }
     //Kaldes på login og igen når invitaioner accepteres
     public static boolean hasInvite(String userID) throws SQLException{
-        //String userID = "";
-        //JDBC.GlobalUserID = userID;
-       
+        
+        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '" + userID + "'");  
-        //ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '" + userID + "'");
-        System.out.println();
+        ResultSet rs = stmt.executeQuery("SELECT user_ID_sendInvite FROM invites WHERE invited_User_ID = '" + userID + "'");  
+        
         while(rs.next()){
-             System.out.println("Invite ID: " + rs.getString(1));
-             System.out.println("User ID: " + rs.getString(2));
-             System.out.println("Team ID: " + rs.getString(3));
+             inviteIDs.add(rs.getString(1));
          }
+         JDBC.getInvites();
         if(rs.isAfterLast()){
-            System.out.println("Works");
+            con.close(); 
+            stmt.close();
             return true;
         } else {
-            System.out.println("oops");
+            con.close(); 
+            stmt.close();
             return false;
         }
-        
+       
     }
-    public static String GetInvites() throws SQLException{
+    public static String getInvites() throws SQLException{
         String userID = "";
-        JDBC.GlobalUserID = userID;
+        userID = JDBC.GlobalUserID;
+        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM invites WHERE user_ID = '2'"); 
+        
+        for(String x : inviteIDs){
+        ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
+                + " invites, users WHERE invites.invited_user_ID = '" + userID + "' AND users.User_ID = '" + x +"'");
+        while(rs.next()){
+             System.out.println("Invite ID: " + rs.getString(1));
+             System.out.println("Team ID: " + rs.getString(2));
+             System.out.println("User ID: " + rs.getString(3));
+             System.out.println("User name: " + rs.getString(4) + " \n ");
+         }
+    }
+        con.close(); 
+        stmt.close();
         
         return "";
     }
