@@ -41,17 +41,27 @@ public class TilføjVindue extends javax.swing.JFrame {
         taskName = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        date = new javax.swing.JTextField();
 
         setResizable(false);
 
-        startTime.setText("8");
+        startTime.setText("10:00");
+        startTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startTimeActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Start Tid:");
 
         jLabel2.setText("Slut Tid:");
 
-        endTime.setText("16");
+        endTime.setText("12:30");
+        endTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endTimeActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Opgave titel");
 
@@ -76,7 +86,12 @@ public class TilføjVindue extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
+        date.setText("jTextField1");
+        date.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,14 +118,14 @@ public class TilføjVindue extends javax.swing.JFrame {
                         .addComponent(jButton1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(164, 164, 164))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -137,32 +152,40 @@ public class TilføjVindue extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timeNow = LocalDateTime.now();
         
-        jTextField1.setText(dtf.format(timeNow));
+        date.setText(dtf.format(timeNow));
     }
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //TODO: sanitize input forkert input er muligt, og vil ødelægge det
-        try{
-            //JDBC.addTask(jLabel4.getText(), taskName.getText(), startTime.getText(), endTime.getText());
-        }
-        catch (Exception e){
-            System.out.println("ERROR: COULD NOT ADD TASK TO DATABASE");
-       
-        }
-       
-        
-       
-        /*
-        System.out.println("DATE OF EVENT: "+jTextField1.getText());
-        System.out.println("TASK_NAME: "+taskName.getText());
-        System.out.println("START_TIME: "+startTime.getText());
-        System.out.println("END_TIME: "+endTime.getText());
-        */
-        
-        
-        Hovedvindue.setTaskButton();
-        
+        //Gamle regex: \\d{2}\\/\\d{2}\\/\\d{4} skiftede det stortset med det samme da datoen 99/99/9999 er gyldig
+        //https://stackoverflow.com/a/25759060
+        String timeReg = "^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])";
+        if (date.getText().matches("\\d{2}\\/\\d{2}\\/\\d{4}")){
+            if (taskName.getText().matches("[a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
+                if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
+                    try{
+                            //JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+                                System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
+                                Hovedvindue.setTaskButton();
+                        }
+                        catch(Exception e){
+                         e.printStackTrace();
+                        }
+                }
+                else{
+                    //Eventuelt lav et label der fortæller det
+                System.out.println("Fejl i tidspunkt");
+                } 
+            }
+            else{
+                //Eventuelt lav et label der fortæller det
+            System.out.println(taskName.getText() +"\n Error in name\n " + taskName.getText().matches("\\[a-zA-ZæøåØÅÆ\\,\\.\\-\\/\\s]+"));
+            }
+        } else{
+            //Eventuelt lav et label der fortæller det
+            System.out.println("Fejl i datoen");
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -172,6 +195,18 @@ public class TilføjVindue extends javax.swing.JFrame {
     private void taskNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taskNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_taskNameActionPerformed
+
+    private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateActionPerformed
+
+    private void startTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startTimeActionPerformed
+
+    private void endTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endTimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_endTimeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,13 +244,13 @@ public class TilføjVindue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JTextField date;
     public static javax.swing.JTextField endTime;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    public static javax.swing.JTextField jTextField1;
     public static javax.swing.JTextField startTime;
     public static javax.swing.JTextField taskName;
     // End of variables declaration//GEN-END:variables

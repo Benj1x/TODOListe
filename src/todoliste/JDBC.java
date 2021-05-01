@@ -7,6 +7,7 @@ package todoliste;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.SQLException;
@@ -42,6 +43,9 @@ public class JDBC {
      }
      
     }
+    public static void acceptedInvite(){
+        
+    }
     public static void addTask(String day, String taskName, String startTime, String endTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
        //This works rev 1
@@ -65,7 +69,12 @@ public class JDBC {
        con.close(); 
        stmt.close();
     }
- 
+    public static void deleteTask(){
+        
+    }
+    public static void deleteInvite(){
+        
+    }
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
         //on user login get userID and save it for use in "userID" fields.
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
@@ -90,6 +99,7 @@ public class JDBC {
             System.out.println("Logget ind på bruger: " + username);
             con.close(); 
             stmt.close();
+            JDBC.getTasks();
             return true;
         } else{
             System.out.println("Ikke logget ind.");
@@ -176,10 +186,11 @@ public class JDBC {
 
     }
     
-    public static void getTasks(String userID) throws SQLException{
+    public static void getTasks() throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-       
+        String userID = "";
+        userID = JDBC.GlobalUserID;
         //This works rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
                 + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + userID + "' AND todolists.User_ID= '" + userID + "'");
@@ -251,36 +262,45 @@ public class JDBC {
              inviteIDs.add(rs.getString(1));
          }
          JDBC.getInvites();
+         
+         
         if(rs.isAfterLast()){
-            con.close(); 
             stmt.close();
+            con.close(); 
             return true;
         } else {
-            con.close(); 
             stmt.close();
+            con.close(); 
             return false;
         }
        
     }
+    //Har skrevet Query om, det var nemmere at få fat i invitationerne med rigtig info hvis jeg skrev den om i stedet
+    //REV 1
     public static String getInvites() throws SQLException{
         String userID = "";
         userID = JDBC.GlobalUserID;
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        
-        for(String x : inviteIDs){
         ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
-                + " invites, users WHERE invites.invited_user_ID = '" + userID + "' AND users.User_ID = '" + x +"'");
+                + " invites, users WHERE invites.invited_user_ID = "+userID+" AND users.User_ID = invites.user_ID_sendInvite");
+       try{
+           
+        ArrayList<String> invites = new ArrayList<String>();
+        //TODO Oliver skal håndtere dette output så han kan bruge det i UI
         while(rs.next()){
-             System.out.println("Invite ID: " + rs.getString(1));
-             System.out.println("Team ID: " + rs.getString(2));
-             System.out.println("User ID: " + rs.getString(3));
-             System.out.println("User name: " + rs.getString(4) + " \n ");
+             System.out.println("invite_ID: " + rs.getString(1));
+             System.out.println("team_ID: " + rs.getString(2));
+             System.out.println("user_ID_sendInvite: " + rs.getString(3));
+             System.out.println("username: " + rs.getString(4));
          }
-    }
-        con.close(); 
-        stmt.close();
+            con.close(); 
+            stmt.close();
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
         
         return "";
     }

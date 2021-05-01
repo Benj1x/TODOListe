@@ -390,7 +390,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         if(jComboBox1.getSelectedItem() == "Min liste"){
             try{
-                JDBC.getTasks(JDBC.GlobalUserID);
+                JDBC.getTasks();
             }
             catch(Exception e){
                 e.getStackTrace();
@@ -408,7 +408,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         Herefter ganger jeg de antal minutter som blev fundet, med vores værdi for hvor mange pixels der er tilrådighed epr minut.
         Jeg omdanner den til en integer, for at vi kan indsætte den i en JButton.setBounds().
         */
-        //TilføjVindue.jTextField1.getText()
+        //TilføjVindue.date.getText()
         
         
         String[] arrOfStartTime = TilføjVindue.startTime.getText().split(":");

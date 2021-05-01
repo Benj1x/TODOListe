@@ -32,27 +32,32 @@ public class RegistrerVindue extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        usernameField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        emailField.setText("jTextField1");
+        emailField.setText("");
 
         jLabel1.setText("Email:");
 
         jLabel2.setText("Password:");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Username:");
 
-        jTextField1.setText("jTextField1");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        usernameField.setText("");
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                usernameFieldActionPerformed(evt);
             }
         });
 
@@ -83,7 +88,7 @@ public class RegistrerVindue extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField1)
+                            .addComponent(usernameField)
                             .addGap(100, 100, 100))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(86, 86, 86)
@@ -110,7 +115,7 @@ public class RegistrerVindue extends javax.swing.JFrame {
                 .addContainerGap(84, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,20 +136,24 @@ public class RegistrerVindue extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (jTextField1.getText().matches("\\^[A-Za-z0-9+_.-]+@(.+)$")){
-            System.out.println(jTextField1);
+        if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
+                && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$") &&
+                usernameField.getText().matches("[a-zA-ZæøåØÅÆ0-9\\s]+")){
+            try{
+                   JDBC.signUp(usernameField.getText(), emailField.getText(), jPasswordField1.getText());
+            }
+            catch(Exception e){
+                System.out.print("FEJL I REGISTERINGEN AF BRUGEREN");
+                e.printStackTrace();
+            }
         }
-        try{
-            //JDBC.signUp(jTextField1.getText(), emailField.getText(), jPasswordField1.getText());
-        }
-        catch(Exception e){
-            System.out.println("FEJL I REGISTERINGEN AF BRUGERE");
-            e.getStackTrace();
+        else{
+            System.out.println("Ugylidgt input");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -153,6 +162,10 @@ public class RegistrerVindue extends javax.swing.JFrame {
         loginvindue.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +211,6 @@ public class RegistrerVindue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,13 +43,18 @@ public class LoginVindue extends javax.swing.JFrame {
             }
         });
 
-        emailField.setText("jTextField1");
+        emailField.setText("");
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Email:");
 
         jLabel2.setText("Password:");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("");
 
         jLabel3.setText("Har du ikke en konto?");
 
@@ -144,6 +149,10 @@ public class LoginVindue extends javax.swing.JFrame {
         registrervindue.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     /**
      * @param args the command line arguments
