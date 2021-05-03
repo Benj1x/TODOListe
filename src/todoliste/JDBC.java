@@ -69,10 +69,19 @@ public class JDBC {
        con.close(); 
        stmt.close();
     }
-    public static void deleteTask(){
+    public static void deleteTask(String date, String beginTime, String Endtime) throws SQLException{
+        String userID;
+        userID = JDBC.GlobalUserID;
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        //Skal rettes til når GUI er mere klar
+        ResultSet rs = stmt.executeQuery("DELETE FROM todolists WHERE User_ID = '" + userID + "' AND Date = '30-04-2021' AND Begin_Time = '17:20' AND End_Time = '17:20'");
         
+        con.close(); 
+        stmt.close();
     }
     public static void deleteInvite(){
+        //Skal rettes til når GUI er mere klar
         
     }
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
@@ -156,6 +165,9 @@ public class JDBC {
         con.close(); 
         stmt.close();
         return userID;
+    }
+    public static void sendInvite(){
+        
     }
     
     public static void signUp(String username, String email, String password) throws SQLException{
@@ -252,8 +264,6 @@ public class JDBC {
     }
     //Kaldes på login og igen når invitaioner accepteres
     public static boolean hasInvite(String userID) throws SQLException{
-        
-        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT user_ID_sendInvite FROM invites WHERE invited_User_ID = '" + userID + "'");  
@@ -286,8 +296,6 @@ public class JDBC {
         ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
                 + " invites, users WHERE invites.invited_user_ID = "+userID+" AND users.User_ID = invites.user_ID_sendInvite");
        try{
-           
-        ArrayList<String> invites = new ArrayList<String>();
         //TODO Oliver skal håndtere dette output så han kan bruge det i UI
         while(rs.next()){
              System.out.println("invite_ID: " + rs.getString(1));
@@ -306,4 +314,3 @@ public class JDBC {
     }
     
 }
-

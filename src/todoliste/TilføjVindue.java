@@ -165,9 +165,9 @@ public class TilføjVindue extends javax.swing.JFrame {
             if (taskName.getText().matches("[a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
                 if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
                     try{
-                            //JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
-                                System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
-                                Hovedvindue.setTaskButton();
+                        System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
+                        //JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+                        Hovedvindue.setTaskButton();
                         }
                         catch(Exception e){
                          e.printStackTrace();
