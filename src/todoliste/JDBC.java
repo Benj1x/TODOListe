@@ -97,13 +97,14 @@ public class JDBC {
         String password = "";
         
         while(rs.next()){
-             userID = rs.getString(1);
-             username = rs.getString(2);
-             email = rs.getString(3);
-             password = rs.getString(4);
-         }
+            userID = rs.getString(1);
+            username = rs.getString(2);
+            email = rs.getString(3);
+            password = rs.getString(4);
+        }
         JDBC.GlobalUserID = userID;
         JDBC.hasInvite(userID);
+        
         if (loginPassword.equals(password)){
             System.out.println("Logget ind på bruger: " + username);
             con.close(); 
@@ -117,8 +118,6 @@ public class JDBC {
             return false;
         }
         
-        
-        //Når login siden er lavet, så er query klar, vi skal bare tjekke om login oplysninger som brugeren giver er korrekt
     }
     
     public static String getUserDetails(String loginEmail) throws SQLException{
@@ -166,8 +165,24 @@ public class JDBC {
         stmt.close();
         return userID;
     }
-    public static void sendInvite(){
+    //Needs testing
+    public static void sendInvite(String TeamID, String Email) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        String UserID;
+        UserID = JDBC.GlobalUserID;
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + Email + "'");
         
+        if (Email.equals(rs.getString(3))){
+            rs = stmt.executeQuery("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + UserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
+            "FROM users invited WHERE invited.email = '" + Email + "'");
+            System.out.println("Brugeren blev inviteret!");
+        }
+        else{
+            System.out.println("Brugeren eksistere ikke!");
+        }
+        con.close(); 
+        stmt.close();
     }
     
     public static void signUp(String username, String email, String password) throws SQLException{
@@ -294,7 +309,7 @@ public class JDBC {
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
-                + " invites, users WHERE invites.invited_user_ID = "+userID+" AND users.User_ID = invites.user_ID_sendInvite");
+                + " invites, users WHERE invites.invited_user_ID = " + userID + " AND users.User_ID = invites.user_ID_sendInvite");
        try{
         //TODO Oliver skal håndtere dette output så han kan bruge det i UI
         while(rs.next()){
