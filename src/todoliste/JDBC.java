@@ -43,9 +43,23 @@ public class JDBC {
      }
      
     }
-    public static void acceptedInvite(){
+    
+    public static void acceptedInvite(String teamID) throws SQLException{
+        String userID;
+        userID = JDBC.GlobalUserID;
+        
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + userID + "' AND team_ID = '" + teamID + "'");
+        
+        stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + userID + "', '" + teamID + "');");
+        //Feedback "invitationen er accpeteret velkommen til 'holdNavn'!"
+        
+        con.close(); 
+        stmt.close();
         
     }
+    
     public static void addTask(String day, String taskName, String startTime, String endTime) throws SQLException{
        //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
        //This works rev 1
@@ -69,21 +83,46 @@ public class JDBC {
        con.close(); 
        stmt.close();
     }
+    
+    public static void createTeam(String teamName) throws SQLException{
+        
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("INSERT INTO Teams(Team_Name) VALUES ('" + teamName + "');");
+        
+        con.close();
+        stmt.close();
+        
+        //Feedback "Hold: 'holdNavn' blev lavet!" 
+    }
+    
     public static void deleteTask(String date, String beginTime, String Endtime) throws SQLException{
         String userID;
         userID = JDBC.GlobalUserID;
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         //Skal rettes til når GUI er mere klar
-        ResultSet rs = stmt.executeQuery("DELETE FROM todolists WHERE User_ID = '" + userID + "' AND Date = '30-04-2021' AND Begin_Time = '17:20' AND End_Time = '17:20'");
+        stmt.executeUpdate("DELETE FROM todolists WHERE User_ID = '" + userID + "' AND Date = '30-04-2021' AND Begin_Time = '17:20' AND End_Time = '17:20'");
         
         con.close(); 
         stmt.close();
     }
-    public static void deleteInvite(){
+    public static void deleteInvite(String teamID, String holdNavn) throws SQLException{
+        String userID;
+        userID = JDBC.GlobalUserID;
+        
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + userID + "' AND team_ID = '" + teamID + "'");
+        
+        con.close();
+        stmt.close();
         //Skal rettes til når GUI er mere klar
+        //Feedback bruger med "Invitation til hold 'holdnavn' er blevet slettet
+        
         
     }
+    
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
         //on user login get userID and save it for use in "userID" fields.
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
@@ -125,7 +164,6 @@ public class JDBC {
         Statement stmt = con.createStatement();
 
         ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + loginEmail + "'");
-        
         
         String userID = "";
         String username = "";
@@ -174,7 +212,7 @@ public class JDBC {
         ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + Email + "'");
         
         if (Email.equals(rs.getString(3))){
-            rs = stmt.executeQuery("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + UserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
+            stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + UserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
             "FROM users invited WHERE invited.email = '" + Email + "'");
             System.out.println("Brugeren blev inviteret!");
         }
