@@ -251,7 +251,7 @@ public class JDBC {
 
     }
     
-    public static void getTasks() throws SQLException{
+    public static ArrayList getTasks() throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         String userID = "";
@@ -260,16 +260,21 @@ public class JDBC {
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
                 + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + userID + "' AND todolists.User_ID= '" + userID + "'");
         
+        ArrayList<String> getTaskArray = new ArrayList<>();
         
         while(rs.next()){
-             System.out.println(rs.getString(1));
-             System.out.println(rs.getString(2));
-             System.out.println(rs.getString(3));
-             System.out.println(rs.getString(4));
-             System.out.println(rs.getString(5));
+             //System.out.println(rs.getString(1));
+             getTaskArray.add(rs.getString(3));
+             getTaskArray.add(rs.getString(2));
+             getTaskArray.add(rs.getString(4));
+             getTaskArray.add(rs.getString(5));
          }
+        
+        
         con.close(); 
         stmt.close();
+        
+        return getTaskArray;
     }
     
     public static HashMap getUserTeams(String userID) throws SQLException{
@@ -297,7 +302,7 @@ public class JDBC {
        return TeamInfo;
     }
     
-    public static void getTeamTasks(String teamID) throws SQLException{
+    public static ArrayList getTeamTasks(String teamID) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
 
@@ -305,15 +310,20 @@ public class JDBC {
         ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name, todolists.Date, todolists.Begin_Time, todolists.End_Time "
                 + "FROM todolists WHERE todolists.Team_ID='" + teamID + "'");  
         
+        ArrayList<String> getTeamTaskArray = new ArrayList<>();
+        
         while(rs.next()){
-             System.out.println("Task name: " + rs.getString(1));
-             System.out.println("Date: " + rs.getString(2));
-             System.out.println("Starting time: " + rs.getString(3));
-             System.out.println("End time: " + rs.getString(4));
+             getTeamTaskArray.add(rs.getString(2));
+             getTeamTaskArray.add(rs.getString(1));
+             getTeamTaskArray.add(rs.getString(3));
+             getTeamTaskArray.add(rs.getString(4));
          }
+       
         
         con.close(); 
         stmt.close();
+        return getTeamTaskArray;
+    
     }
     //Kaldes på login og igen når invitaioner accepteres
     public static boolean hasInvite(String userID) throws SQLException{

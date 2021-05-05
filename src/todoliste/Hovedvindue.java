@@ -6,6 +6,7 @@
 package todoliste;
 
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -16,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -43,7 +45,12 @@ public class Hovedvindue extends javax.swing.JFrame {
         AddToComboBox();
         
         
+        
+        
+        
+        
     }
+    
     
     private void AddToComboBox(){
         jComboBox1.addItem("Min liste");
@@ -81,7 +88,54 @@ public class Hovedvindue extends javax.swing.JFrame {
     
     }
 
-
+    public static void taskHandler(){
+        if(jComboBox1.getSelectedItem() == "Min liste"){
+            try{
+                if(JDBC.getTasks().size() <= 4){
+                    setTaskButton(JDBC.getTasks().get(1).toString(), JDBC.getTasks().get(2).toString(), JDBC.getTasks().get(3).toString());
+                    System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString());
+                }
+                if(JDBC.getTasks().size() > 4){
+                    int amount = JDBC.getTasks().size() / 4;
+                    
+                    for(int i = 0; i < amount; i++){
+                        if(i == 0){
+                            setTaskButton(JDBC.getTasks().get(1).toString(), JDBC.getTasks().get(2).toString(), JDBC.getTasks().get(3).toString());
+                            System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString()+JDBC.getTasks().get(3).toString());
+                        }
+                        setTaskButton(JDBC.getTasks().get(i+5).toString(), JDBC.getTasks().get(i+6).toString(), JDBC.getTasks().get(i+7).toString());
+                        System.out.println(JDBC.getTasks().get(i+4).toString()+JDBC.getTasks().get(i+5).toString()+JDBC.getTasks().get(i+6).toString()+JDBC.getTasks().get(i+7).toString());
+                    }
+                }
+            }
+            catch(Exception e){
+                e.getStackTrace();
+            }
+        }
+        if(jComboBox1.getSelectedItem() != "Min liste"){
+            try{
+                String[] ArrOfTeamID = jComboBox1.getSelectedItem().toString().split(", ");
+                if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() <= 4){
+                    System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
+                }
+                if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() > 4){
+                    int teamAmount = JDBC.getTeamTasks(ArrOfTeamID[1]).size() / 4;
+                    
+                    for(int j = 0; j < teamAmount; j++){
+                        if(j == 0){
+                            System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
+                        }
+                        
+                        System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+4).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
+                    }
+                }
+                JDBC.getTeamTasks(ArrOfTeamID[1]);
+            }
+            catch(Exception e){
+                e.getStackTrace();
+            }
+        }
+    }
     
 
     /**
@@ -150,6 +204,11 @@ public class Hovedvindue extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -217,12 +276,12 @@ public class Hovedvindue extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel5)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel5))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -384,22 +443,13 @@ public class Hovedvindue extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        System.out.println("Item changed");
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
     public static ArrayList<JButton> buttons = new ArrayList<>();
 
-    public static void setTaskButton(){
-        
-        if(jComboBox1.getSelectedItem() == "Min liste"){
-            try{
-                JDBC.getTasks();
-            }
-            catch(Exception e){
-                e.getStackTrace();
-            }
-            
-        }
-        
-          
-        //TODO: CHECK OM KALENDEREN STEMMER OVERENS MED TASKENS TEXTFIELD
+    public static void setTaskButton(String taskName, String beginTime, String endTime){
         
         
         /*
@@ -411,7 +461,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         //TilføjVindue.date.getText()
         
         
-        String[] arrOfStartTime = TilføjVindue.startTime.getText().split(":");
+        String[] arrOfStartTime = beginTime.split(":");
         String StartTime = "";
         
         String[] HourStartTime = arrOfStartTime[0].split("");
@@ -440,7 +490,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         double startTimeInPixel = HoursAndMinutes * 0.685;
         int m_startTimeInPixel = (int) startTimeInPixel;
         
-        String[] arrOfEndTime = TilføjVindue.endTime.getText().split(":");
+        String[] arrOfEndTime = endTime.split(":");
         String EndTime = "";
         
         String[] HourEndTime = arrOfEndTime[0].split("");
@@ -469,7 +519,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         int m_getTimeBetween = (int) getTimeBetween;
 
         
-        JButton button=new JButton(TilføjVindue.taskName.getText());
+        JButton button=new JButton(taskName);
         buttons.add(button);
         
         int i = -1;

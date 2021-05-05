@@ -125,6 +125,10 @@ public class LoginVindue extends javax.swing.JFrame {
                     emailFieldText = emailField.getText();
                     Hovedvindue hovedvindue = new Hovedvindue();
                     hovedvindue.setVisible(true);
+                    //Hovedvindue.setTaskButton(JDBC.getTasks().get(0).toString(),JDBC.getTasks().get(1).toString(),JDBC.getTasks().get(2).toString());
+                    
+                    Hovedvindue.taskHandler();
+                    
                     this.dispose();
                 }
                 else{
