@@ -16,6 +16,10 @@ public class RegistrerVindue extends javax.swing.JFrame {
      */
     public RegistrerVindue() {
         initComponents();
+        emailError.setVisible(false);
+        usernameError.setVisible(false);
+        passwordError.setVisible(false);
+        userExistslbl.setVisible(false);
     }
 
     /**
@@ -36,14 +40,39 @@ public class RegistrerVindue extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        usernameError = new javax.swing.JLabel();
+        emailError = new javax.swing.JLabel();
+        passwordError = new javax.swing.JLabel();
+        userExistslbl = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Sign-up");
+        setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setLocation(new java.awt.Point(502, 215));
+        setMaximumSize(new java.awt.Dimension(458, 325));
+        setMinimumSize(new java.awt.Dimension(458, 325));
+        setName("Sign-up"); // NOI18N
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         emailField.setText("");
+        emailField.setToolTipText("eksempel@email.dk");
+        emailField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(emailField);
+        emailField.setBounds(100, 90, 250, 30);
 
         jLabel1.setText("Email:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(10, 100, 40, 14);
 
         jLabel2.setText("Password:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 150, 90, 14);
 
         jPasswordField1.setText("");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -51,8 +80,12 @@ public class RegistrerVindue extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jPasswordField1);
+        jPasswordField1.setBounds(100, 140, 250, 30);
 
         jLabel3.setText("Username:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(12, 50, 90, 14);
 
         usernameField.setText("");
         usernameField.addActionListener(new java.awt.event.ActionListener() {
@@ -60,6 +93,8 @@ public class RegistrerVindue extends javax.swing.JFrame {
                 usernameFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(usernameField);
+        usernameField.setBounds(100, 40, 250, 30);
 
         jButton1.setText("Registrer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,8 +102,12 @@ public class RegistrerVindue extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(170, 200, 110, 23);
 
         jLabel4.setText("Har du allerede en konto?");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(120, 270, 150, 14);
 
         jLabel5.setText("Login");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,62 +115,34 @@ public class RegistrerVindue extends javax.swing.JFrame {
                 jLabel5MouseClicked(evt);
             }
         });
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(280, 270, 50, 14);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(usernameField)
-                            .addGap(100, 100, 100))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(86, 86, 86)
-                            .addComponent(jButton1)
-                            .addContainerGap(172, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(emailField)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(98, Short.MAX_VALUE))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addContainerGap())
-        );
+        usernameError.setForeground(new java.awt.Color(255, 0, 0));
+        usernameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usernameError.setText("Ugyldigt brugernavn!");
+        getContentPane().add(usernameError);
+        usernameError.setBounds(102, 70, 250, 14);
+
+        emailError.setForeground(new java.awt.Color(255, 0, 0));
+        emailError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        emailError.setText("Ugyldig Email!");
+        getContentPane().add(emailError);
+        emailError.setBounds(100, 120, 250, 14);
+
+        passwordError.setForeground(new java.awt.Color(255, 0, 0));
+        passwordError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        passwordError.setText("Ugyldigt kodeord!");
+        getContentPane().add(passwordError);
+        passwordError.setBounds(100, 170, 250, 14);
+
+        userExistslbl.setForeground(new java.awt.Color(255, 0, 0));
+        userExistslbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userExistslbl.setText("Denne email eksistere allerede!");
+        getContentPane().add(userExistslbl);
+        userExistslbl.setBounds(99, 240, 250, 14);
+
+        getAccessibleContext().setAccessibleName("Sign-up");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,19 +152,39 @@ public class RegistrerVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
-                && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$") &&
-                usernameField.getText().matches("[a-zA-ZæøåØÅÆ0-9\\s]+")){
-            try{
-                   JDBC.signUp(usernameField.getText(), emailField.getText(), jPasswordField1.getText());
+        if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$")){
+            if (jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
+               if (usernameField.getText().matches("[a-zA-ZæøåØÅÆ0-9\\s]+")){
+                   emailError.setVisible(false);
+                   passwordError.setVisible(false);
+                   usernameError.setVisible(false);
+                   try{
+                   
+                    if (JDBC.signUp(usernameField.getText(), emailField.getText(), jPasswordField1.getText())){
+                        userExistslbl.setVisible(true);
+                    }
+                    }
+                    catch(Exception e){
+                    e.printStackTrace();
+                    }
+                   
+               }
+               else{
+                emailError.setVisible(false);
+                passwordError.setVisible(false);
+                usernameError.setVisible(true);
+               }     
             }
-            catch(Exception e){
-                System.out.print("FEJL I REGISTERINGEN AF BRUGEREN");
-                e.printStackTrace();
+            else{
+                emailError.setVisible(false);
+                passwordError.setVisible(true);
+                usernameError.setVisible(false);
             }
         }
-        else{
-            System.out.println("Ugylidgt input");
+         else{
+            emailError.setVisible(true);
+            passwordError.setVisible(false);
+            usernameError.setVisible(false);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -166,6 +197,10 @@ public class RegistrerVindue extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +238,7 @@ public class RegistrerVindue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel emailError;
     private javax.swing.JTextField emailField;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -211,6 +247,9 @@ public class RegistrerVindue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel passwordError;
+    private javax.swing.JLabel userExistslbl;
+    private javax.swing.JLabel usernameError;
     private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

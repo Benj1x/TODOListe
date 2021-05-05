@@ -15,6 +15,7 @@ public class LoginVindue extends javax.swing.JFrame {
     
     public LoginVindue() {
         initComponents();
+        loginError.setVisible(false);
     }
 
     /**
@@ -33,8 +34,16 @@ public class LoginVindue extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        loginError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Login");
+        setLocation(new java.awt.Point(600, 230));
+        setMaximumSize(new java.awt.Dimension(360, 310));
+        setMinimumSize(new java.awt.Dimension(360, 310));
+        setName("Login"); // NOI18N
+        setResizable(false);
+        getContentPane().setLayout(null);
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -42,6 +51,8 @@ public class LoginVindue extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(120, 170, 100, 23);
 
         emailField.setText("");
         emailField.addActionListener(new java.awt.event.ActionListener() {
@@ -49,14 +60,24 @@ public class LoginVindue extends javax.swing.JFrame {
                 emailFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(emailField);
+        emailField.setBounds(100, 70, 190, 20);
 
         jLabel1.setText("Email:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 70, 80, 20);
 
         jLabel2.setText("Password:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(20, 120, 80, 20);
 
         jPasswordField1.setText("");
+        getContentPane().add(jPasswordField1);
+        jPasswordField1.setBounds(100, 120, 190, 20);
 
         jLabel3.setText("Har du ikke en konto?");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 240, 130, 14);
 
         jLabel4.setText("Registrer dig her");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,51 +85,14 @@ public class LoginVindue extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(190, 240, 100, 14);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
-                            .addComponent(jPasswordField1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(144, 144, 144)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)))
-                .addContainerGap(118, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap())
-        );
+        loginError.setForeground(new java.awt.Color(255, 0, 0));
+        loginError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginError.setText("Brugernavn eller kodeord forkert!");
+        getContentPane().add(loginError);
+        loginError.setBounds(80, 200, 190, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,7 +116,7 @@ public class LoginVindue extends javax.swing.JFrame {
                     this.dispose();
                 }
                 else{
-                System.out.println("UNABLE TO LOG USER IN");
+                loginError.setVisible(true);
                 }
             //JDBC.signIn(emailField.getText());
             //System.out.println(JDBC.password);
@@ -201,5 +185,6 @@ public class LoginVindue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JLabel loginError;
     // End of variables declaration//GEN-END:variables
 }

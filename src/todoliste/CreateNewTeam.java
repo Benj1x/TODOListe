@@ -16,6 +16,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
      */
     public CreateNewTeam() {
         initComponents();
+        nameError.setVisible(false);
     }
 
     /**
@@ -27,17 +28,36 @@ public class CreateNewTeam extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        teamName = new javax.swing.JTextField();
+        lblTeamName = new javax.swing.JLabel();
         createTeam = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
+        nameError = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Create team");
+        setAlwaysOnTop(true);
+        setFocusTraversalPolicyProvider(true);
+        setLocation(new java.awt.Point(799, 371));
+        setMaximumSize(new java.awt.Dimension(161, 200));
+        setMinimumSize(new java.awt.Dimension(161, 200));
+        setName("Create team"); // NOI18N
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jTextField1.setText("jTextField1");
+        teamName.setText("Hold navn eksempel");
+        teamName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teamNameActionPerformed(evt);
+            }
+        });
+        getContentPane().add(teamName);
+        teamName.setBounds(21, 50, 120, 30);
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Hold navn:");
+        lblTeamName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTeamName.setText("Hold navn:");
+        getContentPane().add(lblTeamName);
+        lblTeamName.setBounds(1, 30, 160, 14);
 
         createTeam.setText("Lav hold");
         createTeam.addActionListener(new java.awt.event.ActionListener() {
@@ -45,6 +65,8 @@ public class CreateNewTeam extends javax.swing.JFrame {
                 createTeamActionPerformed(evt);
             }
         });
+        getContentPane().add(createTeam);
+        createTeam.setBounds(30, 90, 101, 23);
 
         cancel.setText("Fortryd");
         cancel.addActionListener(new java.awt.event.ActionListener() {
@@ -52,44 +74,39 @@ public class CreateNewTeam extends javax.swing.JFrame {
                 cancelActionPerformed(evt);
             }
         });
+        getContentPane().add(cancel);
+        cancel.setBounds(30, 120, 101, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(createTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(createTeam)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(cancel)
-                .addContainerGap())
-        );
+        nameError.setForeground(new java.awt.Color(255, 0, 0));
+        nameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameError.setText("Ugyldigt hold navn!");
+        getContentPane().add(nameError);
+        nameError.setBounds(1, 16, 160, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void createTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTeamActionPerformed
-        // TODO add your handling code here:
+        if (teamName.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
+            try{
+                   System.out.println(teamName.getText());
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            nameError.setVisible(true);
+        }// TODO add your handling code here:
     }//GEN-LAST:event_createTeamActionPerformed
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_cancelActionPerformed
+
+    private void teamNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_teamNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,7 +147,8 @@ public class CreateNewTeam extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
     private javax.swing.JButton createTeam;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblTeamName;
+    private javax.swing.JLabel nameError;
+    private javax.swing.JTextField teamName;
     // End of variables declaration//GEN-END:variables
 }

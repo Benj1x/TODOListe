@@ -56,8 +56,8 @@ public class Hovedvindue extends javax.swing.JFrame {
         jComboBox1.addItem("Min liste");
         
         try{           
-                for (Object i : JDBC.getUserTeams(JDBC.GlobalUserID).keySet()) {
-                    jComboBox1.addItem(JDBC.getUserTeams(JDBC.GlobalUserID).get(i).toString() + ", " + i);
+                for (Object i : JDBC.getUserTeams().keySet()) {
+                    jComboBox1.addItem(JDBC.getUserTeams().get(i).toString() + ", " + i);
                 }   
         }
         catch(Exception e){
@@ -477,8 +477,8 @@ public class Hovedvindue extends javax.swing.JFrame {
     }//GEN-LAST:event_invitesActionPerformed
 
     private void createTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTeamActionPerformed
-        CreateTeam createTeam = new CreateTeam();
-        createTeam.setVisible(true);
+        CreateNewTeam createNewTeam = new CreateNewTeam();
+        createNewTeam.setVisible(true);
     }//GEN-LAST:event_createTeamActionPerformed
 
     public static ArrayList<JButton> buttons = new ArrayList<>();
