@@ -167,7 +167,6 @@ public class TilføjVindue extends javax.swing.JFrame {
                     try{
                         System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
                         //JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
-                        Hovedvindue.setTaskButton();
                         }
                         catch(Exception e){
                          e.printStackTrace();

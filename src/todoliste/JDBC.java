@@ -15,8 +15,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
- * @author Benjamin Høj
+ * <h1>TODOList datahåndtering</h1>
+ * Denne klasse står for at hente data ned fra vores database
+ * <b> Note: </b> For at dette fungere bruges J-Connector library fra MYSQL
+ * @author Benjamin O. Høj
+ * 
  */
 //https://www.youtube.com/watch?v=3OrEsC-QjUA
     //https://www.youtube.com/watch?v=wR0jg0eQsZA
@@ -40,10 +43,22 @@ public class JDBC {
      catch(Exception e){
          System.out.println(e);
          e.printStackTrace();
+         System.out.println("JDBC er offline");
      }
      
     }
-    
+    /**
+   * Denne metode bruges til at manipulere databasen når en bruger
+   * acceptere en hold invitation. This is
+   * a the simplest form of a class method, just to
+   * show the usage of various javadoc Tags.
+   * @param teamID Den eneste parameter i acceptedInvite metoden
+   * teamID parameteren indeholder et unikt tal til at indentificere 
+   * hvert hold i databasen.
+   * teamID er opbevaret i en String, Strings fylder mere end den 
+   * primitive type int. Dette er gjort da ID'et bliver hentet ned 
+   * som en String og da variablen ikke gemmes i programmet er impact minimalt
+   */
     public static void acceptedInvite(String teamID) throws SQLException{
         String userID;
         userID = JDBC.GlobalUserID;
@@ -107,6 +122,7 @@ public class JDBC {
         con.close(); 
         stmt.close();
     }
+    
     public static void deleteInvite(String teamID, String holdNavn) throws SQLException{
         String userID;
         userID = JDBC.GlobalUserID;
