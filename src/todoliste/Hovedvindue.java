@@ -433,6 +433,8 @@ public class Hovedvindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        hasRun = false;
+        buttons.clear();
         LoginVindue login = new LoginVindue();
         login.setVisible(true);
         this.dispose();
