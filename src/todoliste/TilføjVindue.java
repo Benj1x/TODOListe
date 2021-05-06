@@ -53,6 +53,7 @@ public class TilføjVindue extends javax.swing.JFrame {
 
         setMaximumSize(new java.awt.Dimension(430, 340));
         setMinimumSize(new java.awt.Dimension(430, 340));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         startTime.setText("10:00");
