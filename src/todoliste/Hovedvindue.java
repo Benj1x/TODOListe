@@ -97,7 +97,7 @@ public class Hovedvindue extends javax.swing.JFrame {
             try{
                 if(JDBC.getTasks().size() <= 4){
                     setTaskButton(JDBC.getTasks().get(1).toString(), JDBC.getTasks().get(2).toString(), JDBC.getTasks().get(3).toString());
-                    System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString());
+                    //System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString());
                 }
                 if(JDBC.getTasks().size() > 4){
                     int amount = JDBC.getTasks().size() / 4;
@@ -105,10 +105,10 @@ public class Hovedvindue extends javax.swing.JFrame {
                     for(int i = 0; i < amount; i++){
                         if(i == 0){
                             setTaskButton(JDBC.getTasks().get(1).toString(), JDBC.getTasks().get(2).toString(), JDBC.getTasks().get(3).toString());
-                            System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString()+JDBC.getTasks().get(3).toString());
+                            //System.out.println(JDBC.getTasks().get(0).toString()+JDBC.getTasks().get(1).toString()+JDBC.getTasks().get(2).toString()+JDBC.getTasks().get(3).toString());
                         }
                         setTaskButton(JDBC.getTasks().get(i+5).toString(), JDBC.getTasks().get(i+6).toString(), JDBC.getTasks().get(i+7).toString());
-                        System.out.println(JDBC.getTasks().get(i+4).toString()+JDBC.getTasks().get(i+5).toString()+JDBC.getTasks().get(i+6).toString()+JDBC.getTasks().get(i+7).toString());
+                        //System.out.println(JDBC.getTasks().get(i+4).toString()+JDBC.getTasks().get(i+5).toString()+JDBC.getTasks().get(i+6).toString()+JDBC.getTasks().get(i+7).toString());
                     }
                 }
             }
@@ -121,7 +121,7 @@ public class Hovedvindue extends javax.swing.JFrame {
                 String[] ArrOfTeamID = jComboBox1.getSelectedItem().toString().split(", ");
                 if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() <= 4){
                     setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
-                    System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
+                    //System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                 }
                 if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() > 4){
                     int teamAmount = JDBC.getTeamTasks(ArrOfTeamID[1]).size() / 4;
@@ -129,10 +129,10 @@ public class Hovedvindue extends javax.swing.JFrame {
                     for(int j = 0; j < teamAmount; j++){
                         if(j == 0){
                             setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
-                            System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
+                            //System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                         }
                         setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
-                        System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+4).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
+                        //System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+4).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
                     }
                 }
                 //JDBC.getTeamTasks(ArrOfTeamID[1]);

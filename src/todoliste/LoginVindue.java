@@ -5,6 +5,8 @@
  */
 package todoliste;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author olive
@@ -43,12 +45,22 @@ public class LoginVindue extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(360, 310));
         setName("Login"); // NOI18N
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
         getContentPane().add(jButton1);
@@ -72,6 +84,11 @@ public class LoginVindue extends javax.swing.JFrame {
         jLabel2.setBounds(20, 120, 80, 20);
 
         jPasswordField1.setText("");
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
+            }
+        });
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(100, 120, 190, 20);
 
@@ -142,6 +159,49 @@ public class LoginVindue extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldActionPerformed
 
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        
+        
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        int key = evt.getKeyCode();
+        if(key == KeyEvent.VK_ENTER){
+            if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
+                && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
+            try{
+                if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
+                    emailFieldText = emailField.getText();
+                    Hovedvindue hovedvindue = new Hovedvindue();
+                    hovedvindue.setVisible(true);
+                    //Hovedvindue.setTaskButton(JDBC.getTasks().get(0).toString(),JDBC.getTasks().get(1).toString(),JDBC.getTasks().get(2).toString());
+                    
+                    Hovedvindue.taskHandler();
+                    
+                    this.dispose();
+                }
+                else{
+                loginError.setVisible(true);
+                }
+            //JDBC.signIn(emailField.getText());
+            //System.out.println(JDBC.password);
+            }
+            catch(Exception e){
+                System.out.print("Exception i Login Vinduet");
+                e.printStackTrace();
+            }
+        }
+        else{
+            //Ugyldigt bruger navn eller password
+        }
+        }
+    }//GEN-LAST:event_jPasswordField1KeyPressed
+
+    
     /**
      * @param args the command line arguments
      */
