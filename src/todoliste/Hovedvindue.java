@@ -477,7 +477,8 @@ public class Hovedvindue extends javax.swing.JFrame {
 
     
     private void invitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invitesActionPerformed
-        // TODO add your handling code here:
+        InvitationVindue invitationVindue = new InvitationVindue();
+        invitationVindue.setVisible(true);
     }//GEN-LAST:event_invitesActionPerformed
 
     private void createTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTeamActionPerformed
