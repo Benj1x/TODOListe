@@ -103,6 +103,15 @@ public class JDBC {
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO Teams(Team_Name) VALUES ('" + teamName + "');");
         
+        ResultSet rs = stmt.executeQuery("SELECT Team_ID FROM teams WHERE Team_Name = '" + teamName + "'");
+        String newTeamID = "";
+        
+        while(rs.next()){
+            newTeamID = rs.getString(1);
+        }
+        
+        stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + JDBC.GlobalUserID + "', '" + newTeamID + "');");
+        
         con.close();
         stmt.close();
         

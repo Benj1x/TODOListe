@@ -89,7 +89,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
     private void createTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createTeamActionPerformed
         if (teamName.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
             try{
-                   System.out.println(teamName.getText());
+                   JDBC.createTeam(teamName.getText());
             }
             catch(Exception e){
                 e.printStackTrace();
