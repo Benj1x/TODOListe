@@ -8,6 +8,7 @@ package todoliste;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -21,6 +22,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.JButton;
+import javax.swing.SpringLayout;
 
 
 /**
@@ -89,6 +91,8 @@ public class Hovedvindue extends javax.swing.JFrame {
     }
 
     public static void taskHandler(){
+        
+        
         if(jComboBox1.getSelectedItem() == "Min liste"){
             try{
                 if(JDBC.getTasks().size() <= 4){
@@ -116,6 +120,7 @@ public class Hovedvindue extends javax.swing.JFrame {
             try{
                 String[] ArrOfTeamID = jComboBox1.getSelectedItem().toString().split(", ");
                 if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() <= 4){
+                    setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                     System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                 }
                 if(JDBC.getTeamTasks(ArrOfTeamID[1]).size() > 4){
@@ -123,18 +128,20 @@ public class Hovedvindue extends javax.swing.JFrame {
                     
                     for(int j = 0; j < teamAmount; j++){
                         if(j == 0){
+                            setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                             System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(0).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(1).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(2).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(3).toString());
                         }
-                        
+                        setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
                         System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+4).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
                     }
                 }
-                JDBC.getTeamTasks(ArrOfTeamID[1]);
+                //JDBC.getTeamTasks(ArrOfTeamID[1]);
             }
             catch(Exception e){
                 e.getStackTrace();
             }
         }
+        
     }
     
 
@@ -176,7 +183,6 @@ public class Hovedvindue extends javax.swing.JFrame {
         setBackground(new java.awt.Color(102, 102, 102));
         setExtendedState(1);
         setForeground(java.awt.Color.yellow);
-        setResizable(false);
 
         jPanel3.setMaximumSize(new java.awt.Dimension(22, 22));
 
@@ -209,11 +215,6 @@ public class Hovedvindue extends javax.swing.JFrame {
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -310,7 +311,7 @@ public class Hovedvindue extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -325,8 +326,8 @@ public class Hovedvindue extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(389, 389, 389)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(516, 516, 516)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -379,9 +380,9 @@ public class Hovedvindue extends javax.swing.JFrame {
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,21 +458,22 @@ public class Hovedvindue extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        try{
-            String[] arrOfComboBox = jComboBox1.getSelectedItem().toString().split(", ");
-        }
-        catch(Exception e){
-            e.getStackTrace();
-        }
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        System.out.println("Item changed");
+
+        if(evt.getStateChange() == 1 && hasRun != false){
+            
+            for(JButton e : buttons){
+                jPanel2.remove(e);
+            }
+            buttons.clear();
+            jPanel2.revalidate();
+            jPanel2.repaint();
+            taskHandler();
+        }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
+    
     private void invitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invitesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_invitesActionPerformed
@@ -482,9 +484,9 @@ public class Hovedvindue extends javax.swing.JFrame {
     }//GEN-LAST:event_createTeamActionPerformed
 
     public static ArrayList<JButton> buttons = new ArrayList<>();
+    public static boolean hasRun = false;
 
     public static void setTaskButton(String taskName, String beginTime, String endTime){
-        
         
         /*
         For at kunne udregne vores starttidspunkt, brugte jeg en matematisk tankegang.
@@ -493,6 +495,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         Jeg omdanner den til en integer, for at vi kan indsætte den i en JButton.setBounds().
         */
         //TilføjVindue.date.getText()
+        
         
         
         String[] arrOfStartTime = beginTime.split(":");
@@ -552,9 +555,12 @@ public class Hovedvindue extends javax.swing.JFrame {
         double getTimeBetween = endTimeInPixel - startTimeInPixel;
         int m_getTimeBetween = (int) getTimeBetween;
 
-        
         JButton button=new JButton(taskName);
+        
+        
         buttons.add(button);
+        
+        
         
         int i = -1;
 
@@ -569,13 +575,16 @@ public class Hovedvindue extends javax.swing.JFrame {
            button.setBounds(m_startTimeInPixel,nextTaskY,m_getTimeBetween,35);
            System.out.println(nextTaskY);
         }
+       
+        
         
         jPanel2.add(button);
         
-        button.revalidate();
-        button.repaint();
+        hasRun = true;
+        
+        jPanel2.repaint();
+        jPanel2.revalidate();
     }
-    
     
     
     /**
