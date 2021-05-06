@@ -28,6 +28,7 @@ import java.util.HashMap;
 public class JDBC {
     public static String GlobalUserID;
     public static ArrayList<String> inviteIDs = new ArrayList<String>();
+    public static String selDate;
     public static void main() throws SQLException{
         
      try{
@@ -101,7 +102,7 @@ public class JDBC {
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        stmt.executeUpdate("INSERT INTO Teams(Team_Name) VALUES ('" + teamName + "');");
+        stmt.executeUpdate("INSERT INTO teams(Team_Name) VALUES ('" + teamName + "');");
         
         ResultSet rs = stmt.executeQuery("SELECT Team_ID FROM teams WHERE Team_Name = '" + teamName + "'");
         String newTeamID = "";
@@ -115,7 +116,7 @@ public class JDBC {
         con.close();
         stmt.close();
         
-        //Feedback "Hold: 'holdNavn' blev lavet!" 
+        //Hovedvindue.AddToComboBox();
     }
     
     public static void deleteTask(String date, String beginTime, String Endtime) throws SQLException{
@@ -271,12 +272,14 @@ public class JDBC {
     }
     
     public static ArrayList getTasks() throws SQLException{
+        System.out.println("Refresh");
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
 
         //This works rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
-                + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + JDBC.GlobalUserID + "' AND todolists.User_ID= '" + JDBC.GlobalUserID + "'");
+                + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + JDBC.GlobalUserID + "' AND todolists.User_ID= '" + JDBC.GlobalUserID + "' AND "
+                + "todolists.Date = '" + selDate + "'");
         
         ArrayList<String> getTaskArray = new ArrayList<>();
         
@@ -326,7 +329,8 @@ public class JDBC {
 
         //This works søger med teamID, rev2 da vi finder Teams ID i getUserTeams, kan denne query forkortes
         ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name, todolists.Date, todolists.Begin_Time, todolists.End_Time "
-                + "FROM todolists WHERE todolists.Team_ID='" + teamID + "'");  
+                + "FROM todolists WHERE todolists.Team_ID='" + teamID + "' AND "
+                + "todolists.Date = '" + selDate + "'");  
         
         ArrayList<String> getTeamTaskArray = new ArrayList<>();
         
@@ -347,7 +351,7 @@ public class JDBC {
     public static boolean hasInvite() throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT user_ID_sendInvite FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "'");  
+        ResultSet rs = stmt.executeQuery("SELECT invite_ID FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "'");  
         
         while(rs.next()){
              inviteIDs.add(rs.getString(1));

@@ -83,6 +83,7 @@ public class Hovedvindue extends javax.swing.JFrame {
         //calendar.add(Calendar.DATE, 1);
         
         jLabel4.setText(SDF.format(calendar.getTime()).toString());
+        JDBC.selDate = jLabel4.getText();
     }
     
     public void checkTaskDates(){
@@ -429,6 +430,14 @@ public class Hovedvindue extends javax.swing.JFrame {
             SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
             //calendar.add(Calendar.DATE, dateTracker++);
             jLabel4.setText(SDF.format(calendar.getTime()).toString());
+            
+            JDBC.selDate = jLabel4.getText();;
+            try{
+                JDBC.getTasks();
+            } catch(Exception e){
+                
+            }
+            
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -457,6 +466,13 @@ public class Hovedvindue extends javax.swing.JFrame {
         SimpleDateFormat SDF = new SimpleDateFormat("dd-MM-yyyy");
         //calendar.add(Calendar.DATE, dateTracker--);
         jLabel4.setText(SDF.format(calendar.getTime()).toString());
+        
+        JDBC.selDate = jLabel4.getText();
+            try{
+                JDBC.getTasks();
+            } catch(Exception e){
+                
+            }
 
     }//GEN-LAST:event_jButton9ActionPerformed
 
