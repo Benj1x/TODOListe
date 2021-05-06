@@ -21,6 +21,10 @@ public class TilføjVindue extends javax.swing.JFrame {
     public TilføjVindue() {
         initComponents();
         setDateText();
+        dateError.setVisible(false);
+        taskNameError.setVisible(false);
+        startTimeError.setVisible(false);
+        endTimeError.setVisible(false);
         
     }
 
@@ -42,8 +46,14 @@ public class TilføjVindue extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         date = new javax.swing.JTextField();
+        dateError = new javax.swing.JLabel();
+        taskNameError = new javax.swing.JLabel();
+        startTimeError = new javax.swing.JLabel();
+        endTimeError = new javax.swing.JLabel();
 
-        setResizable(false);
+        setMaximumSize(new java.awt.Dimension(430, 340));
+        setMinimumSize(new java.awt.Dimension(430, 340));
+        getContentPane().setLayout(null);
 
         startTime.setText("10:00");
         startTime.addActionListener(new java.awt.event.ActionListener() {
@@ -51,10 +61,16 @@ public class TilføjVindue extends javax.swing.JFrame {
                 startTimeActionPerformed(evt);
             }
         });
+        getContentPane().add(startTime);
+        startTime.setBounds(162, 134, 119, 20);
 
         jLabel1.setText("Start Tid:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(88, 137, 70, 14);
 
         jLabel2.setText("Slut Tid:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(88, 175, 70, 14);
 
         endTime.setText("12:30");
         endTime.addActionListener(new java.awt.event.ActionListener() {
@@ -62,8 +78,12 @@ public class TilføjVindue extends javax.swing.JFrame {
                 endTimeActionPerformed(evt);
             }
         });
+        getContentPane().add(endTime);
+        endTime.setBounds(162, 172, 119, 20);
 
-        jLabel3.setText("Opgave titel");
+        jLabel3.setText("Opgave titel:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(78, 99, 80, 14);
 
         taskName.setText("Opgave");
         taskName.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +91,8 @@ public class TilføjVindue extends javax.swing.JFrame {
                 taskNameActionPerformed(evt);
             }
         });
+        getContentPane().add(taskName);
+        taskName.setBounds(162, 96, 119, 20);
 
         jButton1.setText("Tilføj");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +100,8 @@ public class TilføjVindue extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(320, 266, 80, 23);
 
         jButton2.setText("Annuller");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +109,8 @@ public class TilføjVindue extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(219, 266, 90, 23);
 
         date.setText("jTextField1");
         date.addActionListener(new java.awt.event.ActionListener() {
@@ -92,58 +118,32 @@ public class TilføjVindue extends javax.swing.JFrame {
                 dateActionPerformed(evt);
             }
         });
+        getContentPane().add(date);
+        date.setBounds(177, 57, 59, 20);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(startTime)
-                    .addComponent(endTime)
-                    .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(119, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(164, 164, 164))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(taskName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(startTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(endTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
-        );
+        dateError.setForeground(new java.awt.Color(255, 0, 0));
+        dateError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateError.setText("Ugyldig dato!");
+        getContentPane().add(dateError);
+        dateError.setBounds(144, 40, 130, 14);
+
+        taskNameError.setForeground(new java.awt.Color(255, 0, 0));
+        taskNameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        taskNameError.setText("Ugyldigt opgave navn!");
+        getContentPane().add(taskNameError);
+        taskNameError.setBounds(144, 80, 160, 14);
+
+        startTimeError.setForeground(new java.awt.Color(255, 0, 0));
+        startTimeError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        startTimeError.setText("Ugyldigt start tidspunkt!");
+        getContentPane().add(startTimeError);
+        startTimeError.setBounds(144, 120, 160, 14);
+
+        endTimeError.setForeground(new java.awt.Color(255, 0, 0));
+        endTimeError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        endTimeError.setText("Ugylidigt slut tidspunkt!");
+        getContentPane().add(endTimeError);
+        endTimeError.setBounds(134, 160, 180, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -173,17 +173,28 @@ public class TilføjVindue extends javax.swing.JFrame {
                         }
                 }
                 else{
-                    //Eventuelt lav et label der fortæller det
-                System.out.println("Fejl i tidspunkt");
+                    dateError.setVisible(false);
+                    taskNameError.setVisible(false);
+                    startTimeError.setVisible(false);
+                    endTimeError.setVisible(false);
+                    if (startTime.getText().matches(timeReg)){
+                        endTimeError.setVisible(true);
+                    } else{
+                        startTimeError.setVisible(true);
+                    }
                 } 
             }
             else{
-                //Eventuelt lav et label der fortæller det
-            System.out.println(taskName.getText() +"\n Error in name\n " + taskName.getText().matches("\\[a-zA-ZæøåØÅÆ\\,\\.\\-\\/\\s]+"));
+                dateError.setVisible(false);
+                taskNameError.setVisible(true);
+                startTimeError.setVisible(false);
+                endTimeError.setVisible(false);
             }
         } else{
-            //Eventuelt lav et label der fortæller det
-            System.out.println("Fejl i datoen");
+            dateError.setVisible(true);
+            taskNameError.setVisible(false);
+            startTimeError.setVisible(false);
+            endTimeError.setVisible(false);
             }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -244,13 +255,17 @@ public class TilføjVindue extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField date;
+    private javax.swing.JLabel dateError;
     public static javax.swing.JTextField endTime;
+    private javax.swing.JLabel endTimeError;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     public static javax.swing.JTextField startTime;
+    private javax.swing.JLabel startTimeError;
     public static javax.swing.JTextField taskName;
+    private javax.swing.JLabel taskNameError;
     // End of variables declaration//GEN-END:variables
 }
