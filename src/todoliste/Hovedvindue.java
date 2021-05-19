@@ -434,6 +434,8 @@ public class Hovedvindue extends javax.swing.JFrame {
             JDBC.selDate = jLabel4.getText();;
             try{
                 JDBC.getTasks();
+                
+                
             } catch(Exception e){
                 
             }
@@ -469,10 +471,18 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         JDBC.selDate = jLabel4.getText();
             try{
-                JDBC.getTasks();
+                //JDBC.getTasks();
+                buttons.clear();
+                jPanel2.revalidate();
+                jPanel2.repaint();
+                taskHandler();
+                jPanel2.revalidate();
+                jPanel2.repaint();
             } catch(Exception e){
                 
             }
+            
+            
 
     }//GEN-LAST:event_jButton9ActionPerformed
 

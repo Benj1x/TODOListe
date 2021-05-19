@@ -272,7 +272,6 @@ public class JDBC {
     }
     
     public static ArrayList getTasks() throws SQLException{
-        System.out.println("Refresh");
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
 
@@ -284,7 +283,6 @@ public class JDBC {
         ArrayList<String> getTaskArray = new ArrayList<>();
         
         while(rs.next()){
-             //System.out.println(rs.getString(1));
              getTaskArray.add(rs.getString(3));
              getTaskArray.add(rs.getString(2));
              getTaskArray.add(rs.getString(4));
@@ -372,19 +370,22 @@ public class JDBC {
     }
     //Har skrevet Query om, det var nemmere at få fat i invitationerne med rigtig info hvis jeg skrev den om i stedet
     //REV 1
-    public static String getInvites() throws SQLException{
+    public static ArrayList getInvites() throws SQLException{
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
                 + " invites, users WHERE invites.invited_user_ID = " + JDBC.GlobalUserID + " AND users.User_ID = invites.user_ID_sendInvite");
+        
+        ArrayList<String> getInvites = new ArrayList<>();
+        
        try{
         //TODO Oliver skal håndtere dette output så han kan bruge det i UI
         while(rs.next()){
-             System.out.println("invite_ID: " + rs.getString(1));
-             System.out.println("team_ID: " + rs.getString(2));
-             System.out.println("user_ID_sendInvite: " + rs.getString(3));
-             System.out.println("username: " + rs.getString(4));
+             getInvites.add(rs.getString(1));
+             getInvites.add(rs.getString(2));
+             getInvites.add(rs.getString(3));
+             getInvites.add(rs.getString(4));
          }
             con.close(); 
             stmt.close();
@@ -393,7 +394,7 @@ public class JDBC {
         }
         
         
-        return "";
+        return getInvites;
     }
     
 }

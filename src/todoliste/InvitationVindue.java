@@ -5,6 +5,9 @@
  */
 package todoliste;
 
+import java.util.ArrayList;
+import javax.swing.JLabel;
+
 /**
  *
  * @author olive
@@ -43,7 +46,7 @@ public class InvitationVindue extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 264, Short.MAX_VALUE)
+            .addGap(0, 253, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -52,27 +55,73 @@ public class InvitationVindue extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 237, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void getInvites(){
+    public static ArrayList<JLabel> fromLabelArray = new ArrayList<>();
+    
+    public void getInvites(){
+        
+
         try{
-            System.out.print("Invites :" + JDBC.hasInvite());
-            System.out.println(JDBC.getInvites());
-        }
+            System.out.println(JDBC.getInvites().size());
+            
+                System.out.println("Yo WTF");
+                
+                int howManyInvites = JDBC.getInvites().size() / 4;
+                
+                //JLabel fromLabel = new JLabel("From " + JDBC.getInvites().get(1).toString());
+                
+                //fromLabelArray.add(fromLabel);
+                
+                int i = -1;
+
+                int element = fromLabelArray.size()-1;
+                
+                i++;
+                
+                System.out.println(JDBC.getInvites().get(i * 3));
+               
+                for(int x = 0; x <= howManyInvites; x++){
+                    
+                JLabel fromLabel = new JLabel("From " + JDBC.getInvites().get(i*3).toString());
+                fromLabelArray.add(fromLabel);  
+                
+                if(fromLabelArray.get(i).getY() <= 0){
+                    fromLabel.setBounds(35,35,65,35);
+                    //System.out.println("Inde i loopet");
+                }
+                else{
+                    int nextTaskY = fromLabelArray.get(i).getBounds().y + (10*element);
+                    fromLabel.setBounds(35,nextTaskY,65,35);
+                    System.out.println("Inde i loopet");
+                }
+                
+                jPanel1.add(fromLabel);
+                }
+                
+                
+                jPanel1.repaint();
+                jPanel1.revalidate();
+                
+            }
         catch(Exception e){
             e.getStackTrace();
         }
