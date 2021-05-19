@@ -10,6 +10,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -29,7 +31,7 @@ import javax.swing.SpringLayout;
  *
  * @author olive
  */
-public class Hovedvindue extends javax.swing.JFrame {
+public class Hovedvindue extends javax.swing.JFrame{
 
     /**
      * Creates new form Hovedvindue
@@ -585,8 +587,13 @@ public class Hovedvindue extends javax.swing.JFrame {
         int m_getTimeBetween = (int) getTimeBetween;
 
         JButton button=new JButton(taskName);
+        button.addActionListener(new ActionListener(){
         
-        
+        public void actionPerformed(ActionEvent e)
+        {
+            System.out.println("You clicked button "+e.getSource().toString());
+        }
+        });
         buttons.add(button);
         
         
@@ -613,6 +620,10 @@ public class Hovedvindue extends javax.swing.JFrame {
         
         jPanel2.repaint();
         jPanel2.revalidate();
+    }
+    public void actionPerformed(ActionEvent e)
+    {
+        System.out.println("You clicked button "+e.getSource().toString());
     }
     
     

@@ -23,7 +23,7 @@ public class TODOListe {
         LoginVindue loginvindue = new LoginVindue();
         loginvindue.setVisible(true);
         
-        JDBC.main();
+        JDBC.load();
         
     }
     

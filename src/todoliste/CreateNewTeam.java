@@ -5,6 +5,8 @@
  */
 package todoliste;
 
+import java.awt.Color;
+
 /**
  *
  * @author Benjamin Høj
@@ -16,7 +18,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
      */
     public CreateNewTeam() {
         initComponents();
-        nameError.setVisible(false);
+        creationStatus.setVisible(false);
     }
 
     /**
@@ -32,7 +34,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
         lblTeamName = new javax.swing.JLabel();
         createTeam = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
-        nameError = new javax.swing.JLabel();
+        creationStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Create team");
@@ -77,11 +79,11 @@ public class CreateNewTeam extends javax.swing.JFrame {
         getContentPane().add(cancel);
         cancel.setBounds(30, 120, 101, 23);
 
-        nameError.setForeground(new java.awt.Color(255, 0, 0));
-        nameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nameError.setText("Ugyldigt hold navn!");
-        getContentPane().add(nameError);
-        nameError.setBounds(1, 16, 160, 14);
+        creationStatus.setForeground(new java.awt.Color(255, 0, 0));
+        creationStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        creationStatus.setText("Ugyldigt hold navn!");
+        getContentPane().add(creationStatus);
+        creationStatus.setBounds(1, 16, 160, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -90,13 +92,18 @@ public class CreateNewTeam extends javax.swing.JFrame {
         if (teamName.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
             try{
                    JDBC.createTeam(teamName.getText());
+                   creationStatus.setText("Holdet blev lavet!");
+                    creationStatus.setForeground(Color.green);
+                    creationStatus.setVisible(true);
             }
             catch(Exception e){
                 e.printStackTrace();
             }
         }
         else{
-            nameError.setVisible(true);
+            creationStatus.setText("Ugyldigt hold navn!");
+            creationStatus.setForeground(Color.red);
+            creationStatus.setVisible(true);
         }// TODO add your handling code here:
     }//GEN-LAST:event_createTeamActionPerformed
 
@@ -147,8 +154,8 @@ public class CreateNewTeam extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancel;
     private javax.swing.JButton createTeam;
+    private javax.swing.JLabel creationStatus;
     private javax.swing.JLabel lblTeamName;
-    private javax.swing.JLabel nameError;
     private javax.swing.JTextField teamName;
     // End of variables declaration//GEN-END:variables
 }

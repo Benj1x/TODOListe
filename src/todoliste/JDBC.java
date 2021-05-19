@@ -131,6 +131,7 @@ public class JDBC{
    * @param teamName er navnet på det hold som brugeren ville lave
    */
     public static void createTeam(String teamName) throws SQLException{
+        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO teams(Team_Name) VALUES ('" + teamName + "');");
