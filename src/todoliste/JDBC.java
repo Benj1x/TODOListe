@@ -25,11 +25,15 @@ import java.util.HashMap;
     //https://www.youtube.com/watch?v=wR0jg0eQsZA
     //https://lucid.app/lucidchart/e53e4a47-b977-4c5a-a9ac-bafe41dcdf88/edit?beaconFlowId=F42B643A674C6E9F&page=0_0#
 
-public class JDBC {
+public class JDBC{
     public static String GlobalUserID;
     public static ArrayList<String> inviteIDs = new ArrayList<String>();
     public static String selDate;
-    public static void main() throws SQLException{
+    
+    /**
+   * load metoden bruges til at indlæse JDBC driveren
+   */
+    public static void load() throws SQLException{
         
      try{
          Class.forName("com.mysql.cj.jdbc.Driver");
@@ -37,7 +41,6 @@ public class JDBC {
          //username og password til min PHPAdmin host, plz don't haxor me
          Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
          
-         System.out.println("JDBC er live");
          con.close();     
      }
      
@@ -49,10 +52,8 @@ public class JDBC {
      
     }
     /**
-   * Denne metode bruges til at manipulere databasen når en bruger
-   * acceptere en hold invitation. This is
-   * a the simplest form of a class method, just to
-   * show the usage of various javadoc Tags.
+   * acceptedInvite metoden bruges til at manipulere databasen når en bruger
+   * acceptere en hold invitation. 
    * @param teamID Den eneste parameter i acceptedInvite metoden
    * teamID parameteren indeholder et unikt tal til at indentificere 
    * hvert hold i databasen.
@@ -66,17 +67,22 @@ public class JDBC {
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "' AND team_ID = '" + teamID + "'");
-        
-        stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + JDBC.GlobalUserID + "', '" + teamID + "');");
         //Feedback "invitationen er accpeteret velkommen til 'holdNavn'!"
-        
         con.close(); 
         stmt.close();
         
+        addUserToTeam(teamID);
+        
     }
-    
-    public static void addTask(String day, String taskName, String startTime, String endTime) throws SQLException{
-       //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
+    /**
+   * addTask metoden bruges til at manipulere databasen når en bruger
+   * tilføjer en opgave til sit personlige skema
+   * @param day indeholder datoen som opgaven er knyttet til
+   * @param taskName indeholder opgavens navn
+   * @param startTime er start tidspunktet for opgaven
+   * @param endTime er slut tidspunktet for opgaven
+   */
+    public static void addTask(String day, String taskName, String startTime, String endTime) throws SQLException{	
        //This works rev 1
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
@@ -86,8 +92,17 @@ public class JDBC {
        stmt.close();
     }
     
+    /**
+   * addTeamTask metoden bruges til at manipulere databasen når en bruger
+   * tilføjer en opgave til et bestemt holds skema
+   * @param teamID er ID'et på holdet, som brugeren havde valgt da opgaven blev lavet
+   * med dette ID kan opgaven tilknyttes til holdet.
+   * @param day indeholder datoen som opgaven er knyttet til
+   * @param taskName indeholder opgavens navn
+   * @param startTime er start tidspunktet for opgaven
+   * @param endTime er slut tidspunktet for opgaven
+   */
     public static void addTeamTask(String teamID, String day, String taskName, String startTime, String endTime) throws SQLException{
-       //System.out.println(jTextField1.getText()+ " " + jTextField2.getText() + " " + jTextField3.getText());	
        //This works rev 1
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
@@ -97,9 +112,25 @@ public class JDBC {
        con.close(); 
        stmt.close();
     }
+    public static void addUserToTeam(String teamID) throws SQLException{
+       //This works rev 1
+       Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+       Statement stmt = con.createStatement();
+       
+       stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + JDBC.GlobalUserID + "', '" + teamID + "');");
+       
+       con.close(); 
+       stmt.close();
+       
+       JDBC.getUserTeams();
+    }
     
+    /**
+   * createTeam metoden bruges til at tilføje et nyt hold til databasen når en 
+   * bruger tilføjer laver sit eget hold
+   * @param teamName er navnet på det hold som brugeren ville lave
+   */
     public static void createTeam(String teamName) throws SQLException{
-        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("INSERT INTO teams(Team_Name) VALUES ('" + teamName + "');");
@@ -111,14 +142,20 @@ public class JDBC {
             newTeamID = rs.getString(1);
         }
         
-        stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + JDBC.GlobalUserID + "', '" + newTeamID + "');");
-        
         con.close();
         stmt.close();
         
         //Hovedvindue.AddToComboBox();
+        addUserToTeam(newTeamID);
     }
     
+    /**
+   * deleteTask metoden bruges til at manipulere en brugers opgave i databasen 
+   * når en bruger sletter opgaven.
+   * @param date er datoen for opgaven som brugeren vil slette
+   * @param beginTime er tidspunktet opgaven starter
+   * @param endTime er tidspunktet opgaven slutter
+   */
     public static void deleteTask(String date, String beginTime, String Endtime) throws SQLException{
 
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
