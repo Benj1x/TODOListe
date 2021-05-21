@@ -43,11 +43,13 @@ public class Hovedvindue extends javax.swing.JFrame{
 
         initComponents();
         //setTaskButton();
-        
         setDateText();
         
         AddToComboBox();
         
+        taskHandler();
+        jPanel2.revalidate();
+        jPanel2.repaint();
         
         
         
@@ -94,7 +96,6 @@ public class Hovedvindue extends javax.swing.JFrame{
     }
 
     public static void taskHandler(){
-        
         
         if(jComboBox1.getSelectedItem() == "Min liste"){
             try{
@@ -168,18 +169,18 @@ public class Hovedvindue extends javax.swing.JFrame{
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        addTeam = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         invites = new javax.swing.JButton();
         createTeam = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JSeparator();
-        jButton3 = new javax.swing.JButton();
+        xxx = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         usernameLbl = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
+        signOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-Do Liste");
@@ -221,12 +222,12 @@ public class Hovedvindue extends javax.swing.JFrame{
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/todoliste/add-task-button.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addTeam.setIcon(new javax.swing.ImageIcon(getClass().getResource("/todoliste/add-task-button.png"))); // NOI18N
+        addTeam.setBorder(null);
+        addTeam.setBorderPainted(false);
+        addTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addTeamActionPerformed(evt);
             }
         });
 
@@ -287,7 +288,7 @@ public class Hovedvindue extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)
+                        .addComponent(addTeam)
                         .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
@@ -297,7 +298,7 @@ public class Hovedvindue extends javax.swing.JFrame{
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(createTeam))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(addTeam, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(invites))
                 .addGap(15, 15, 15)
@@ -330,12 +331,13 @@ public class Hovedvindue extends javax.swing.JFrame{
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(516, 516, 516)
+                .addGap(510, 510, 510)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton3.setText("jButton3");
+        xxx.setText("jButton3");
+        xxx.setToolTipText("");
 
         jButton4.setText("jButton3");
 
@@ -356,11 +358,11 @@ public class Hovedvindue extends javax.swing.JFrame{
             }
         });
 
-        jButton10.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jButton10.setText("Log af");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
+        signOut.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        signOut.setText("Log af");
+        signOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                signOutActionPerformed(evt);
             }
         });
 
@@ -374,10 +376,10 @@ public class Hovedvindue extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(usernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(signOut, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                            .addComponent(xxx, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                             .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
@@ -395,9 +397,9 @@ public class Hovedvindue extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(usernameLbl)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(signOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(85, 85, 85)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xxx, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -415,10 +417,10 @@ public class Hovedvindue extends javax.swing.JFrame{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeamActionPerformed
         TilføjVindue tilføjvindue = new TilføjVindue();
         tilføjvindue.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addTeamActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //TODO: Slet funktion
@@ -433,11 +435,14 @@ public class Hovedvindue extends javax.swing.JFrame{
             //calendar.add(Calendar.DATE, dateTracker++);
             jLabel4.setText(SDF.format(calendar.getTime()).toString());
             
-            JDBC.selDate = jLabel4.getText();;
+            JDBC.selDate = jLabel4.getText();
             try{
-                JDBC.getTasks();
-                
-                
+                buttons.clear();
+                jPanel2.revalidate();
+                jPanel2.repaint();
+                taskHandler();
+                jPanel2.revalidate();
+                jPanel2.repaint();
             } catch(Exception e){
                 
             }
@@ -445,14 +450,36 @@ public class Hovedvindue extends javax.swing.JFrame{
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    //Når en bruger trykker på log ud knappen tømmer programmet alle arrays
+    //Herefter kaldes closeWindows()
+    //Så åbnes et nyt login vindue
+    private void signOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signOutActionPerformed
         hasRun = false;
         buttons.clear();
+        try{
+          JDBC.getTasks().clear();
+          JDBC.inviteIDs.clear();
+          
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+        closeWindows();
         LoginVindue login = new LoginVindue();
         login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }//GEN-LAST:event_signOutActionPerformed
 
+    //Alle vinduer som er åbne, lukkes lukkes alle åbne vin
+    //9 år gammel kilde, men det fungere stadig (det kan nok gøres bedre i dag) 
+    //https://coderanch.com/t/538905/java/Closing-open-windows-opening
+    private void closeWindows(){
+        System.gc();
+        for (java.awt.Window window : java.awt.Window.getWindows()) {
+            window.dispose();
+            window = null;
+        }
+    }
+    
     private void usernameLblAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_usernameLblAncestorAdded
         try{
             usernameLbl.setText(JDBC.getUserDetails(LoginVindue.emailFieldText));
@@ -483,9 +510,6 @@ public class Hovedvindue extends javax.swing.JFrame{
             } catch(Exception e){
                 
             }
-            
-            
-
     }//GEN-LAST:event_jButton9ActionPerformed
 
 
@@ -587,11 +611,27 @@ public class Hovedvindue extends javax.swing.JFrame{
         int m_getTimeBetween = (int) getTimeBetween;
 
         JButton button=new JButton(taskName);
+        //Adds action event to all butons generated
+        button.setName("buttonID");
+        //kilde: https://stackoverflow.com/a/27840774
         button.addActionListener(new ActionListener(){
         
         public void actionPerformed(ActionEvent e)
         {
-            System.out.println("You clicked button "+e.getSource().toString());
+            //Sæt opgave navn til opgave nummer: (taskID)?
+            deleteTaskVindue deleteTaskVindue = new deleteTaskVindue();
+            deleteTaskVindue.setVisible(true);
+            deleteTaskVindue.setTaskName = "";
+            try{
+                System.out.println("You clicked button "+e.getSource().toString());
+                System.out.println("You clicked button "+e.toString());
+
+            }
+            catch(Exception a){
+                System.out.println("Der var en fejl, Benjamin arbejder på det");
+            }
+            
+            
         }
         });
         buttons.add(button);
@@ -663,12 +703,10 @@ public class Hovedvindue extends javax.swing.JFrame{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addTeam;
     private javax.swing.JButton createTeam;
     private javax.swing.JButton invites;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -685,6 +723,8 @@ public class Hovedvindue extends javax.swing.JFrame{
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JButton signOut;
     private javax.swing.JLabel usernameLbl;
+    private javax.swing.JButton xxx;
     // End of variables declaration//GEN-END:variables
 }

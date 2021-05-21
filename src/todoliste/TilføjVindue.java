@@ -153,7 +153,7 @@ public class TilføjVindue extends javax.swing.JFrame {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDateTime timeNow = LocalDateTime.now();
         
-        date.setText(dtf.format(timeNow));
+        date.setText(JDBC.selDate);
     }
     
     
@@ -162,12 +162,12 @@ public class TilføjVindue extends javax.swing.JFrame {
         //Gamle regex: \\d{2}\\/\\d{2}\\/\\d{4} skiftede det stortset med det samme da datoen 99/99/9999 er gyldig
         //https://stackoverflow.com/a/25759060
         String timeReg = "^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])";
-        if (date.getText().matches("\\d{2}\\/\\d{2}\\/\\d{4}")){
+        if (date.getText().matches("\\d{2}\\-\\d{2}\\-\\d{4}")){
             if (taskName.getText().matches("[a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
                 if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
                     try{
                         System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
-                        //JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
+                        JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
                         }
                         catch(Exception e){
                          e.printStackTrace();

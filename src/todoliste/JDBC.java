@@ -63,7 +63,6 @@ public class JDBC{
    */
     public static void acceptedInvite(String teamID) throws SQLException{
 
-        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "' AND team_ID = '" + teamID + "'");
@@ -315,7 +314,7 @@ public class JDBC{
 
         //This works rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
-                + "todolists.End_Time FROM users, todolists WHERE users.User_ID='" + JDBC.GlobalUserID + "' AND todolists.User_ID= '" + JDBC.GlobalUserID + "' AND "
+                + "todolists.End_Time, todolists.List_ID FROM users, todolists WHERE users.User_ID='" + JDBC.GlobalUserID + "' AND todolists.User_ID= '" + JDBC.GlobalUserID + "' AND "
                 + "todolists.Date = '" + selDate + "'");
         
         ArrayList<String> getTaskArray = new ArrayList<>();
@@ -325,6 +324,8 @@ public class JDBC{
              getTaskArray.add(rs.getString(2));
              getTaskArray.add(rs.getString(4));
              getTaskArray.add(rs.getString(5));
+             getTaskArray.add(rs.getString(6));
+             System.out.println(rs.getString(6));
          }
         
         
