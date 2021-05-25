@@ -158,12 +158,10 @@ public class TilføjVindue extends javax.swing.JFrame {
     
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //TODO: sanitize input forkert input er muligt, og vil ødelægge det
-        //Gamle regex: \\d{2}\\/\\d{2}\\/\\d{4} skiftede det stortset med det samme da datoen 99/99/9999 er gyldig
         //https://stackoverflow.com/a/25759060
         String timeReg = "^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])";
         if (date.getText().matches("\\d{2}\\-\\d{2}\\-\\d{4}")){
-            if (taskName.getText().matches("[a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
+            if (taskName.getText().matches("[0-9a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
                 if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
                     try{
                         System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());

@@ -6,18 +6,19 @@
 package todoliste;
 
 /**
- *
- * @author Benjamin
+ * <h1>TODOList vindue til at slette tasks</h1>
+ * @author Benjamin O. Høj
  */
 public class deleteTaskVindue extends javax.swing.JFrame {
 
+    static String setTaskName, setTaskID;
     /**
      * Creates new form deleteTaskVindue
      */
-    public String setTaskName;
+        
     public deleteTaskVindue() {
         initComponents();
-        taskNamelbl.setText(setTaskName);
+        deletionStatus.setVisible(false);
     }
 
     /**
@@ -33,6 +34,7 @@ public class deleteTaskVindue extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         taskNamelbl = new javax.swing.JLabel();
+        deletionStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(799, 371));
@@ -69,19 +71,60 @@ public class deleteTaskVindue extends javax.swing.JFrame {
         taskNamelbl.setMaximumSize(new java.awt.Dimension(105, 14));
         taskNamelbl.setMinimumSize(new java.awt.Dimension(105, 14));
         taskNamelbl.setPreferredSize(new java.awt.Dimension(105, 14));
+        taskNamelbl.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                taskNamelblAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         getContentPane().add(taskNamelbl);
         taskNamelbl.setBounds(0, 90, 400, 20);
+
+        deletionStatus.setForeground(new java.awt.Color(0, 255, 0));
+        deletionStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deletionStatus.setText("Opgaven blev slettet!");
+        getContentPane().add(deletionStatus);
+        deletionStatus.setBounds(0, 160, 400, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    *Når brugeren trykker på slet knappen, sendes setTaskID til JDBC deleteTask metoden.
+    *Når dette er gjordt, kaldes hovedvinduets taskHandler igen.
+    *For at undgå at brugeren trykker på "Ja" knappen igen, slår vi både "Ja" og "Nej"
+    *knappen fra.
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println("Sletter opgaven: " + taskNamelbl.getText());
+        
+        deletionStatus.setVisible(true);
+        try{
+            JDBC.deleteTask(setTaskID);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+;
+        Hovedvindue.taskHandler();
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    /*
+    *Når vinduet åbnes, opdatere vi teksten på taskNamelbl og setTaskID til den valgte 
+    *opgaves navn og ID.
+    */
+    private void taskNamelblAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_taskNamelblAncestorAdded
+        taskNamelbl.setText(Hovedvindue.taskNameUpdater);
+        setTaskID = Hovedvindue.taskIDUpdater;
+    }//GEN-LAST:event_taskNamelblAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -114,11 +157,13 @@ public class deleteTaskVindue extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new deleteTaskVindue().setVisible(true);
+ 
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel deletionStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

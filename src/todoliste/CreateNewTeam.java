@@ -9,7 +9,7 @@ import java.awt.Color;
 
 /**
  *
- * @author Benjamin Høj
+ * @author Benjamin O. Høj
  */
 public class CreateNewTeam extends javax.swing.JFrame {
 

@@ -6,13 +6,15 @@
 package todoliste;
 
 /**
- *
- * @author olive
+ * <h1>Registrerings vindue</h1>
+ * Dette vindue står for registrering af nye brugere
+ * @author Benjamin O. Høj
+ * @since 06-05-2021
  */
 public class RegistrerVindue extends javax.swing.JFrame {
 
     /**
-     * Creates new form RegistrerVindue
+     * Laver en ny form "RegistrerVindue"
      */
     public RegistrerVindue() {
         initComponents();
@@ -151,6 +153,18 @@ public class RegistrerVindue extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameFieldActionPerformed
 
+    /*
+    *Når en bruger trykker på registrerings knappen tjekkes der om emailField
+    *faktisk er en email. Dette gør den med et simplere regex, først tjekker vi
+    *at der kun er store og små bogstaver, tal eller "+ - .". Efter disse tjekkes der
+    *om der er et "@" efter de første tegn, og til sidst tjekker vi igen efter 
+    *store og små bogstaver, tal eller "+ - ." (Alle disse er tegn der kan bruges i en email.
+    *Bagefter tjekker man om password indeholder gyldige tegn, og til sidst om 
+    *usernameField indeholder gyldige tegn. Dette er tildels for at undgå SQL-injections,
+    *men også for at verificere om en email faktisk er gyldig.
+    *Hvis et felt er ugyldigt, så sendes der en fejl besked til brugeren om det specifikke felt.
+    *Hvis alt input er gyldigt, sendes det til JDBC signUp metoden.
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$")){
             if (jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
@@ -159,9 +173,13 @@ public class RegistrerVindue extends javax.swing.JFrame {
                    passwordError.setVisible(false);
                    usernameError.setVisible(false);
                    try{
-                   
                     if (JDBC.signUp(usernameField.getText(), emailField.getText(), jPasswordField1.getText())){
                         userExistslbl.setVisible(true);
+                    }
+                    else{
+                        LoginVindue loginvindue = new LoginVindue();
+                        loginvindue.setVisible(true);
+                        this.dispose();
                     }
                     }
                     catch(Exception e){
@@ -189,9 +207,7 @@ public class RegistrerVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        LoginVindue loginvindue = new LoginVindue();
-        loginvindue.setVisible(true);
-        this.dispose();
+        
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

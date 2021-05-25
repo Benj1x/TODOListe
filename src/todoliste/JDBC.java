@@ -16,7 +16,7 @@ import java.util.HashMap;
 
 /**
  * <h1>TODOList datahåndtering</h1>
- * Denne klasse står for at hente data ned fra vores database
+ * Denne klasse står for at kommunikere med vores database.
  * <b> Note: </b> For at dette fungere bruges J-Connector library fra MYSQL
  * @author Benjamin O. Høj
  * 
@@ -65,7 +65,7 @@ public class JDBC{
 
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "' AND team_ID = '" + teamID + "'");
+        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + GlobalUserID + "' AND team_ID = '" + teamID + "'");
         //Feedback "invitationen er accpeteret velkommen til 'holdNavn'!"
         con.close(); 
         stmt.close();
@@ -86,7 +86,7 @@ public class JDBC{
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
        
-       stmt.executeUpdate("INSERT INTO todolists (User_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + JDBC.GlobalUserID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
+       stmt.executeUpdate("INSERT INTO todolists (User_ID, Task_Name, Date, Begin_Time, End_Time) VALUE ('" + GlobalUserID + "', '" + taskName + "', '" + day + "', " + "'" + startTime + "', '" + endTime + "')");
        con.close(); 
        stmt.close();
     }
@@ -116,7 +116,7 @@ public class JDBC{
        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
        Statement stmt = con.createStatement();
        
-       stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + JDBC.GlobalUserID + "', '" + teamID + "');");
+       stmt.executeUpdate("INSERT INTO relations (User_ID, team_ID) VALUE ('" + GlobalUserID + "', '" + teamID + "');");
        
        con.close(); 
        stmt.close();
@@ -156,12 +156,12 @@ public class JDBC{
    * @param beginTime er tidspunktet opgaven starter
    * @param endTime er tidspunktet opgaven slutter
    */
-    public static void deleteTask(String date, String beginTime, String Endtime) throws SQLException{
+    public static void deleteTask(String TaskID) throws SQLException{
 
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         //Skal rettes til når GUI er mere klar
-        stmt.executeUpdate("DELETE FROM todolists WHERE User_ID = '" + JDBC.GlobalUserID + "' AND Date = '30-04-2021' AND Begin_Time = '17:20' AND End_Time = '17:20'");
+        stmt.executeUpdate("DELETE FROM todolists WHERE User_ID = '" + GlobalUserID + "' AND List_ID = '" + TaskID + "'");
         
         con.close(); 
         stmt.close();
@@ -172,7 +172,7 @@ public class JDBC{
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "' AND team_ID = '" + teamID + "'");
+        stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + GlobalUserID + "' AND team_ID = '" + teamID + "'");
         
         con.close();
         stmt.close();
@@ -200,7 +200,7 @@ public class JDBC{
             email = rs.getString(3);
             password = rs.getString(4);
         }
-        JDBC.GlobalUserID = userID;
+        GlobalUserID = userID;
         
         
         if (loginPassword.equals(password)){
@@ -269,7 +269,7 @@ public class JDBC{
         ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + Email + "'");
         
         if (Email.equals(rs.getString(3))){
-            stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + JDBC.GlobalUserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
+            stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + GlobalUserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
             "FROM users invited WHERE invited.email = '" + Email + "'");
             System.out.println("Brugeren blev inviteret!");
         }
@@ -311,21 +311,18 @@ public class JDBC{
     public static ArrayList getTasks() throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-
         //This works rev 2
-        ResultSet rs = stmt.executeQuery("SELECT users.Username, todolists.Task_Name, todolists.Date, todolists.Begin_Time, "
-                + "todolists.End_Time, todolists.List_ID FROM users, todolists WHERE users.User_ID='" + JDBC.GlobalUserID + "' AND todolists.User_ID= '" + JDBC.GlobalUserID + "' AND "
-                + "todolists.Date = '" + selDate + "'");
+        ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name,"
+                + "todolists.Begin_Time, todolists.End_Time, todolists.List_ID FROM "
+                + "todolists WHERE todolists.User_ID= '" + GlobalUserID + "' AND todolists.Date = '" + selDate + "'");
         
         ArrayList<String> getTaskArray = new ArrayList<>();
         
         while(rs.next()){
-             getTaskArray.add(rs.getString(3));
+             getTaskArray.add(rs.getString(1));
              getTaskArray.add(rs.getString(2));
+             getTaskArray.add(rs.getString(3));
              getTaskArray.add(rs.getString(4));
-             getTaskArray.add(rs.getString(5));
-             getTaskArray.add(rs.getString(6));
-             System.out.println(rs.getString(6));
          }
         
         
@@ -341,7 +338,7 @@ public class JDBC{
         
         //This works søg med bruger ID rev 2
         ResultSet rs = stmt.executeQuery("SELECT users.username, relations.Relations_ID, relations.User_ID, relations.Team_ID, teams.Team_Name, teams.Team_ID "
-                + "FROM users, relations, teams WHERE users.User_ID='" + JDBC.GlobalUserID + "'AND relations.User_ID=users.User_ID AND teams.Team_ID=relations.Team_ID");
+                + "FROM users, relations, teams WHERE users.User_ID='" + GlobalUserID + "'AND relations.User_ID=users.User_ID AND teams.Team_ID=relations.Team_ID");
         
          HashMap<String, String> TeamInfo = new HashMap<String, String>();
 
@@ -365,15 +362,15 @@ public class JDBC{
         Statement stmt = con.createStatement();
 
         //This works søger med teamID, rev2 da vi finder Teams ID i getUserTeams, kan denne query forkortes
-        ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name, todolists.Date, todolists.Begin_Time, todolists.End_Time "
-                + "FROM todolists WHERE todolists.Team_ID='" + teamID + "' AND "
+        ResultSet rs = stmt.executeQuery("SELECT todolists.Task_Name, todolists.Begin_Time, todolists.End_Time "
+                + ", todolists.List_ID FROM todolists WHERE todolists.Team_ID='" + teamID + "' AND "
                 + "todolists.Date = '" + selDate + "'");  
         
         ArrayList<String> getTeamTaskArray = new ArrayList<>();
         
         while(rs.next()){
-             getTeamTaskArray.add(rs.getString(2));
              getTeamTaskArray.add(rs.getString(1));
+             getTeamTaskArray.add(rs.getString(2));
              getTeamTaskArray.add(rs.getString(3));
              getTeamTaskArray.add(rs.getString(4));
          }
@@ -388,7 +385,7 @@ public class JDBC{
     public static boolean hasInvite() throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT invite_ID FROM invites WHERE invited_User_ID = '" + JDBC.GlobalUserID + "'");  
+        ResultSet rs = stmt.executeQuery("SELECT invite_ID FROM invites WHERE invited_User_ID = '" + GlobalUserID + "'");  
         
         while(rs.next()){
              inviteIDs.add(rs.getString(1));
@@ -414,7 +411,7 @@ public class JDBC{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
-                + " invites, users WHERE invites.invited_user_ID = " + JDBC.GlobalUserID + " AND users.User_ID = invites.user_ID_sendInvite");
+                + " invites, users WHERE invites.invited_user_ID = " + GlobalUserID + " AND users.User_ID = invites.user_ID_sendInvite");
         
         ArrayList<String> getInvites = new ArrayList<>();
         

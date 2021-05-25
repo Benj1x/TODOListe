@@ -114,11 +114,14 @@ public class LoginVindue extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /*
+    *Disse felter gennemgår samme tjeks som Registrerings vinduet
+    *Email må gerne indholde store og små bogstaver, tal (emails kan indeholde IP'er efter @ i stedet for etc studiobeans.dk)
+    *Email må også indeholde punktum, bindestreg og underscore
+    *Password må indeholde alle latniske bogstaver + danske.
+    */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        En simpel regex til at verificere emails, emailen skal indholde mindst et punktum, og alt efter det sidste punktum skal være et bogstaver
-//        Email må gerne indholde store og små bogstaver, tal (emails kan indeholde IP'er efter @ i stedet for etc studiobeans.dk)
-//        Email må også indeholde punktum, bindestreg og underscore
-//        Password må indeholde alle latniske bogstaver + danske. (Skulle være jævnt sikkert overfor SQL Injection, men er dog ikke ekspert lmao)
+
         if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
                 && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
             try{
