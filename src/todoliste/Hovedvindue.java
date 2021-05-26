@@ -211,9 +211,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         setBackground(new java.awt.Color(102, 102, 102));
         setExtendedState(1);
         setForeground(java.awt.Color.yellow);
-        setMaximumSize(new java.awt.Dimension(1160, 641));
         setMinimumSize(new java.awt.Dimension(1160, 641));
-        setPreferredSize(new java.awt.Dimension(1160, 731));
         setResizable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
