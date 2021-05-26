@@ -5,8 +5,11 @@
  */
 package todoliste;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -19,7 +22,7 @@ public class InvitationVindue extends javax.swing.JFrame {
      */
     public InvitationVindue() {
         initComponents();
-        getInvites();
+        inviteHandler();
     }
 
     /**
@@ -31,102 +34,228 @@ public class InvitationVindue extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollBar1 = new javax.swing.JScrollBar();
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollBar2 = new javax.swing.JScrollBar();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(424, 300));
+        setMinimumSize(new java.awt.Dimension(424, 300));
+        setPreferredSize(new java.awt.Dimension(424, 300));
+        setResizable(false);
 
-        jLabel1.setText("DINE INVITATIONER");
+        jLabel1.setText("Dine hold invitationer:");
+
+        jLabel2.setText("Et hold navn");
+
+        jButton1.setText("Accepter");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Afvis");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Et Andet hold navn");
+
+        jButton3.setText("Accepter");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Afvis");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(56, 56, 56)))
+                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 237, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 394, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     public static ArrayList<JLabel> fromLabelArray = new ArrayList<>();
     
-    public void getInvites(){
+    public static void inviteHandler(){
+        //buttons.clear();
+        jPanel1.removeAll();
+        jPanel1.revalidate();
+        jPanel1.repaint();
         
-
-        try{
-            System.out.println(JDBC.getInvites().size());
-            
-                System.out.println("Yo WTF");
-                
-                int howManyInvites = JDBC.getInvites().size() / 4;
-                
-                //JLabel fromLabel = new JLabel("From " + JDBC.getInvites().get(1).toString());
-                
-                //fromLabelArray.add(fromLabel);
-                
-                int i = -1;
-
-                int element = fromLabelArray.size()-1;
-                
-                i++;
-                
-                System.out.println(JDBC.getInvites().get(i * 3));
-               
-                for(int x = 0; x <= howManyInvites; x++){
-                    
-                JLabel fromLabel = new JLabel("From " + JDBC.getInvites().get(i*3).toString());
-                fromLabelArray.add(fromLabel);  
-                
-                if(fromLabelArray.get(i).getY() <= 0){
-                    fromLabel.setBounds(35,35,65,35);
-                    //System.out.println("Inde i loopet");
+        int indexCorr = 0;
+            try{
+                int amount = JDBC.getTasks().size() / 4;
+                for(int i = 0; i < amount; i++){
+                    setInvites(JDBC.getInvites().get(i).toString(), JDBC.getInvites().get(i+1).toString(), JDBC.getInvites().get(i+3).toString());
+                        //System.out.println(JDBC.getTasks().get(i+4).toString()+JDBC.getTasks().get(i+5).toString()+JDBC.getTasks().get(i+6).toString()+JDBC.getTasks().get(i+7).toString());
+                    indexCorr = indexCorr + 4;      
                 }
-                else{
-                    int nextTaskY = fromLabelArray.get(i).getBounds().y + (10*element);
-                    fromLabel.setBounds(35,nextTaskY,65,35);
-                    System.out.println("Inde i loopet");
-                }
-                
-                jPanel1.add(fromLabel);
-                }
-                
-                
-                jPanel1.repaint();
-                jPanel1.revalidate();
                 
             }
-        catch(Exception e){
-            e.getStackTrace();
+            catch(Exception e){
+                e.printStackTrace();
+            }
         }
+        
+    public static ArrayList<JButton> Acceptbuttons = new ArrayList<>();
+
+    public static void setInvites(String inviteID, String teamID, String username){
+        JButton accept=new JButton("Accepter");
+        JButton deny=new JButton("Afvis");
+        
+        try{
+                accept.setName(teamID); 
+                deny.setName(teamID);
+        }
+        catch(Exception e){
+            System.out.println("Fejl i henting af hold ID");
+            e.printStackTrace();
+        }
+        /*
+        *Hver knap får en actionListener, når man trykker på knappen "Accepter"
+        *sendes hold ID'et til JDBC.acceptedInvite
+        *Trykker man på "Afvis" så sendes hold ID'et til JDBC.deleteInvite
+        *Disse to har hvert deres try-catch, for det kunne ikke smides i en enkelt
+        */
+        accept.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try{
+                    JDBC.acceptedInvite(accept.getName());
+                }
+                catch(Exception ex){
+                    System.out.println("Fejl i tilføjelse af accepter knap");
+                    ex.printStackTrace();
+                }
+            }
+        });
+        accept.add(accept);
+        deny.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                try{
+                    JDBC.deleteInvite(deny.getName());  
+                }
+                catch(Exception ex){
+                    System.out.println("Fejl i tilføjelse af deny knap");
+                    ex.printStackTrace();
+                }
+                
+            }
+        });
+        
+        int i = -1;
+        
+        int element = Acceptbuttons.size()-1;
+        i++;
+
+        if(Acceptbuttons.get(i).getY()<=0){
+            accept.set
+            accept.setBounds(m_startTimeInPixel,2,m_getTimeBetween,35);
+        }
+        else{
+           int nextTaskY = Acceptbuttons.get(i).getBounds().y + (37*element);
+           button.setBounds(m_startTimeInPixel,nextTaskY,m_getTimeBetween,35);
+        }
+       
+        jPanel2.add(button);
+        
+        hasRun = true;
+        
+        jPanel2.repaint();
+        jPanel2.revalidate();
     }
-    
     /**
      * @param args the command line arguments
      */
@@ -163,7 +292,15 @@ public class InvitationVindue extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollBar jScrollBar1;
+    private javax.swing.JScrollBar jScrollBar2;
     // End of variables declaration//GEN-END:variables
 }
