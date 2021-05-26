@@ -102,12 +102,21 @@ public class deleteTaskVindue extends javax.swing.JFrame {
         
         deletionStatus.setVisible(true);
         try{
-            JDBC.deleteTask(setTaskID);
+            if(Hovedvindue.jComboBox1.getSelectedItem() == "Min liste"){
+                JDBC.deleteUserTask(setTaskID);
+                Hovedvindue.taskHandler();
+            }
+            else{
+                String[] ArrOfTeamID = Hovedvindue.jComboBox1.getSelectedItem().toString().split(", ");
+                JDBC.deleteTeamTask(ArrOfTeamID[1], setTaskID);
+                Hovedvindue.taskHandler();
+            }
         }
         catch(Exception e){
+            System.out.println("Fejl i sletning af opgaver");
             e.printStackTrace();
         }
-;
+
         Hovedvindue.taskHandler();
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);

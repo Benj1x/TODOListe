@@ -156,7 +156,7 @@ public class JDBC{
    * @param beginTime er tidspunktet opgaven starter
    * @param endTime er tidspunktet opgaven slutter
    */
-    public static void deleteTask(String TaskID) throws SQLException{
+    public static void deleteUserTask(String TaskID) throws SQLException{
 
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
@@ -167,9 +167,19 @@ public class JDBC{
         stmt.close();
     }
     
+    public static void deleteTeamTask(String TeamID, String TaskID) throws SQLException{
+
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+        //Skal rettes til når GUI er mere klar
+        stmt.executeUpdate("DELETE FROM todolists WHERE Team_ID = '" + TeamID + "' AND List_ID = '" + TaskID + "'");
+        
+        con.close(); 
+        stmt.close();
+    }
+    
     public static void deleteInvite(String teamID) throws SQLException{
 
-        
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
         stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + GlobalUserID + "' AND team_ID = '" + teamID + "'");
@@ -261,15 +271,20 @@ public class JDBC{
         return userID;
     }
     //Needs testing
-    public static boolean sendInvite(String TeamID, String Email) throws SQLException{
+    public static boolean inviteCheck(String TeamID, String Email) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
 
-        ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + Email + "'");
+        ResultSet rs = stmt.executeQuery("SELECT users.Email, users.user_ID FROM users WHERE users.Email = '" + Email + "'");
+        String testEmail = "";
+        String userID = "";
+        while (rs.next()){
+            testEmail = rs.getString(1);
+            userID= rs.getString(2);
+        }
         
-        if (Email.equals(rs.getString(3))){
-            stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + GlobalUserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
-            "FROM users invited WHERE invited.email = '" + Email + "'");
+        if (Email.equals(testEmail.toLowerCase())){
+            sendInvite(TeamID, Email);
             con.close(); 
             stmt.close();
             return true;
@@ -279,6 +294,14 @@ public class JDBC{
             stmt.close();
             return false;
         }  
+    }
+    public static void sendInvite(String TeamID, String Email) throws SQLException{
+        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
+        Statement stmt = con.createStatement();
+
+        stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) "
+                + "SELECT invited.User_ID, '"+ TeamID +"' AS Team_ID, '"+ GlobalUserID +"' AS User_ID FROM users invited WHERE invited.email = '"+ Email+"'");
+
     }
     
     public static boolean signUp(String username, String email, String password) throws SQLException{
