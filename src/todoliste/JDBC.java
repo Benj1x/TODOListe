@@ -167,7 +167,7 @@ public class JDBC{
         stmt.close();
     }
     
-    public static void deleteInvite(String teamID, String holdNavn) throws SQLException{
+    public static void deleteInvite(String teamID) throws SQLException{
 
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
@@ -206,7 +206,6 @@ public class JDBC{
         if (loginPassword.equals(password)){
             con.close(); 
             stmt.close();
-            JDBC.hasInvite();
             JDBC.getTasks();
             return true;
         } else{
@@ -262,7 +261,7 @@ public class JDBC{
         return userID;
     }
     //Needs testing
-    public static void sendInvite(String TeamID, String Email) throws SQLException{
+    public static boolean sendInvite(String TeamID, String Email) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
 
@@ -271,13 +270,15 @@ public class JDBC{
         if (Email.equals(rs.getString(3))){
             stmt.executeUpdate("INSERT INTO invites (invited_User_ID, team_ID, user_ID_sendInvite) SELECT invited.User_ID, '" + GlobalUserID + "' AS Team_ID, '"+ TeamID +"' AS User_ID\n" +
             "FROM users invited WHERE invited.email = '" + Email + "'");
-            System.out.println("Brugeren blev inviteret!");
+            con.close(); 
+            stmt.close();
+            return true;
         }
         else{
-            System.out.println("Brugeren eksistere ikke!");
-        }
-        con.close(); 
-        stmt.close();
+            con.close(); 
+            stmt.close();
+            return false;
+        }  
     }
     
     public static boolean signUp(String username, String email, String password) throws SQLException{
@@ -381,37 +382,15 @@ public class JDBC{
         return getTeamTaskArray;
     
     }
-    //Kaldes på login og igen når invitaioner accepteres
-    public static boolean hasInvite() throws SQLException{
-        Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
-        Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT invite_ID FROM invites WHERE invited_User_ID = '" + GlobalUserID + "'");  
-        
-        while(rs.next()){
-             inviteIDs.add(rs.getString(1));
-         }
-         JDBC.getInvites();
-         
-         
-        if(rs.isAfterLast()){
-            stmt.close();
-            con.close(); 
-            return true;
-        } else {
-            stmt.close();
-            con.close(); 
-            return false;
-        }
-       
-    }
     //Har skrevet Query om, det var nemmere at få fat i invitationerne med rigtig info hvis jeg skrev den om i stedet
     //REV 1
     public static ArrayList getInvites() throws SQLException{
         
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username FROM"
-                + " invites, users WHERE invites.invited_user_ID = " + GlobalUserID + " AND users.User_ID = invites.user_ID_sendInvite");
+        ResultSet rs = stmt.executeQuery("SELECT invites.invite_ID, invites.team_ID, invites.user_ID_sendInvite, users.username, "
+                + "teams.Team_Name FROM invites, users, teams WHERE invites.invited_user_ID = '"+ GlobalUserID +"' AND "
+                + "users.User_ID = invites.user_ID_sendInvite AND teams.Team_ID = invites.team_ID");
         
         ArrayList<String> getInvites = new ArrayList<>();
         
@@ -422,6 +401,7 @@ public class JDBC{
              getInvites.add(rs.getString(2));
              getInvites.add(rs.getString(3));
              getInvites.add(rs.getString(4));
+             getInvites.add(rs.getString(5));
          }
             con.close(); 
             stmt.close();

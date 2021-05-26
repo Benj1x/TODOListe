@@ -106,12 +106,10 @@ public class Hovedvindue extends javax.swing.JFrame{
                         //System.out.println(JDBC.getTasks().get(i+4).toString()+JDBC.getTasks().get(i+5).toString()+JDBC.getTasks().get(i+6).toString()+JDBC.getTasks().get(i+7).toString());
                     indexCorr = indexCorr + 4;      
                 }
-                
             }
             catch(Exception e){
                 e.printStackTrace();
             }
-            //return false;
         }
         else{
             try{
@@ -206,6 +204,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         usernameLbl = new javax.swing.JLabel();
         addTeam = new javax.swing.JButton();
         invites = new javax.swing.JButton();
+        inviteUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("To-Do Liste");
@@ -552,6 +551,13 @@ public class Hovedvindue extends javax.swing.JFrame{
             }
         });
 
+        inviteUser.setText("Inviter");
+        inviteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inviteUserActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -568,6 +574,8 @@ public class Hovedvindue extends javax.swing.JFrame{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createTeam)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(inviteUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(invites))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1052, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -595,7 +603,9 @@ public class Hovedvindue extends javax.swing.JFrame{
                                 .addComponent(usernameLbl)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(createTeam))
-                            .addComponent(invites))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(invites)
+                                .addComponent(inviteUser)))
                         .addGap(3, 3, 3)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(addTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -722,6 +732,11 @@ public class Hovedvindue extends javax.swing.JFrame{
         CreateNewTeam createNewTeam = new CreateNewTeam();
         createNewTeam.setVisible(true);
     }//GEN-LAST:event_createTeamActionPerformed
+
+    private void inviteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inviteUserActionPerformed
+        inviteUserVindue InviteUserVindue = new inviteUserVindue();
+        InviteUserVindue.setVisible((true));
+    }//GEN-LAST:event_inviteUserActionPerformed
 
     public static ArrayList<JButton> buttons = new ArrayList<>();
     public static boolean hasRun = false;
@@ -890,10 +905,11 @@ public class Hovedvindue extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTeam;
     private javax.swing.JButton createTeam;
+    private javax.swing.JButton inviteUser;
     private javax.swing.JButton invites;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private static javax.swing.JComboBox<String> jComboBox1;
+    public static javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
