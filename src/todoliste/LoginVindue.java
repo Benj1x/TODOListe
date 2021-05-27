@@ -94,26 +94,26 @@ public class LoginVindue extends javax.swing.JFrame {
         getContentPane().add(jPasswordField1);
         jPasswordField1.setBounds(100, 120, 190, 20);
 
-        jLabel3.setText("Har du ikke en konto?");
+        jLabel3.setText("Don't have an account?");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(50, 240, 130, 14);
+        jLabel3.setBounds(50, 240, 170, 14);
 
-        jLabel4.setText("Registrer dig her");
+        jLabel4.setText("Create one here!");
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
         });
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(190, 240, 100, 14);
+        jLabel4.setBounds(220, 240, 100, 14);
 
         loginError.setForeground(new java.awt.Color(255, 0, 0));
         loginError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginError.setText("Brugernavn eller kodeord forkert!");
+        loginError.setText("Username or password incorrect!");
         getContentPane().add(loginError);
         loginError.setBounds(80, 200, 190, 14);
 
-        onlineStatus.setText("Programmet er offline!");
+        onlineStatus.setText("Program is offline!");
         getContentPane().add(onlineStatus);
         onlineStatus.setBounds(104, 50, 150, 14);
 

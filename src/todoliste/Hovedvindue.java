@@ -526,7 +526,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         jPanel1.add(jLabel36);
         jLabel36.setBounds(40, 60, 40, 30);
 
-        createTeam.setText("Lav hold");
+        createTeam.setText("Create team");
         createTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createTeamActionPerformed(evt);
@@ -534,7 +534,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         });
 
         signOut.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        signOut.setText("Log af");
+        signOut.setText("Sign out");
         signOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signOutActionPerformed(evt);
@@ -561,14 +561,14 @@ public class Hovedvindue extends javax.swing.JFrame{
             }
         });
 
-        invites.setText("Invitationer");
+        invites.setText("Invites");
         invites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 invitesActionPerformed(evt);
             }
         });
 
-        inviteUser.setText("Inviter");
+        inviteUser.setText("Invite");
         inviteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inviteUserActionPerformed(evt);
@@ -585,7 +585,7 @@ public class Hovedvindue extends javax.swing.JFrame{
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(usernameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(signOut, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(signOut)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

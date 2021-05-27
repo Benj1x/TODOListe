@@ -41,7 +41,7 @@
                   <Group type="102" attributes="0">
                       <Component id="usernameLbl" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="signOut" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="signOut" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -754,7 +754,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="createTeam">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Lav hold"/>
+        <Property name="text" type="java.lang.String" value="Create team"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createTeamActionPerformed"/>
@@ -765,7 +765,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="10" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Log af"/>
+        <Property name="text" type="java.lang.String" value="Sign out"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="signOutActionPerformed"/>
@@ -795,7 +795,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="invites">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Invitationer"/>
+        <Property name="text" type="java.lang.String" value="Invites"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invitesActionPerformed"/>
@@ -803,7 +803,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="inviteUser">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Inviter"/>
+        <Property name="text" type="java.lang.String" value="Invite"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inviteUserActionPerformed"/>

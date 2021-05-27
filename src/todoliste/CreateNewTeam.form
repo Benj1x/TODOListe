@@ -41,7 +41,7 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="teamName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hold navn eksempel"/>
+        <Property name="text" type="java.lang.String" value="A team name"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teamNameActionPerformed"/>
@@ -55,7 +55,7 @@
     <Component class="javax.swing.JLabel" name="lblTeamName">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Hold navn:"/>
+        <Property name="text" type="java.lang.String" value="Team name:"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -65,27 +65,27 @@
     </Component>
     <Component class="javax.swing.JButton" name="createTeam">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Lav hold"/>
+        <Property name="text" type="java.lang.String" value="Create team"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createTeamActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="90" width="101" height="-1"/>
+          <AbsoluteConstraints x="21" y="90" width="120" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="cancel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Fortryd"/>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelActionPerformed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="30" y="120" width="101" height="-1"/>
+          <AbsoluteConstraints x="21" y="120" width="120" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -95,7 +95,7 @@
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Ugyldigt hold navn!"/>
+        <Property name="text" type="java.lang.String" value="Illegal team name!"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

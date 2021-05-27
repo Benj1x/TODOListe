@@ -64,11 +64,11 @@ public class inviteUserVindue extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inviter en bruger til et hold via. Email:");
+        jLabel1.setText("Invite a user with their email:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(40, 80, 200, 14);
 
-        emailField.setText("exempel@email.dk");
+        emailField.setText("exampel@email.dk");
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
@@ -77,7 +77,7 @@ public class inviteUserVindue extends javax.swing.JFrame {
         getContentPane().add(emailField);
         emailField.setBounds(50, 100, 190, 20);
 
-        jButton1.setText("Inviter");
+        jButton1.setText("Invite");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -121,10 +121,10 @@ public class inviteUserVindue extends javax.swing.JFrame {
         String[] ArrOfTeamID = jComboBox2.getSelectedItem().toString().split(", ");
         try{
             if(JDBC.inviteCheck(ArrOfTeamID[1], emailField.getText())){
-                inviteStatus.setText("Brugeren blev inviteret!");
+                inviteStatus.setText("User was invited!");
             }
             else{
-                inviteStatus.setText("Brugeren eksistere ikke!");
+                inviteStatus.setText("User doesn't exist!");
             }
         }
         catch(CJCommunicationsException e){

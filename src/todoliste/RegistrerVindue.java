@@ -107,11 +107,11 @@ public class RegistrerVindue extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(170, 200, 110, 23);
 
-        jLabel4.setText("Har du allerede en konto?");
+        jLabel4.setText("Already have an account?");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(120, 270, 150, 14);
 
-        jLabel5.setText("Login");
+        jLabel5.setText("Sign in!");
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
@@ -122,29 +122,27 @@ public class RegistrerVindue extends javax.swing.JFrame {
 
         usernameError.setForeground(new java.awt.Color(255, 0, 0));
         usernameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        usernameError.setText("Ugyldigt brugernavn!");
+        usernameError.setText("Illegal username!");
         getContentPane().add(usernameError);
         usernameError.setBounds(102, 70, 250, 14);
 
         emailError.setForeground(new java.awt.Color(255, 0, 0));
         emailError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        emailError.setText("Ugyldig Email!");
+        emailError.setText("Illegal Email!");
         getContentPane().add(emailError);
         emailError.setBounds(100, 120, 250, 14);
 
         passwordError.setForeground(new java.awt.Color(255, 0, 0));
         passwordError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        passwordError.setText("Ugyldigt kodeord!");
+        passwordError.setText("Illegal password!");
         getContentPane().add(passwordError);
         passwordError.setBounds(100, 170, 250, 14);
 
         userExistslbl.setForeground(new java.awt.Color(255, 0, 0));
         userExistslbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        userExistslbl.setText("Denne email eksistere allerede!");
+        userExistslbl.setText("This email already exists!");
         getContentPane().add(userExistslbl);
         userExistslbl.setBounds(99, 240, 250, 14);
-
-        getAccessibleContext().setAccessibleName("Sign-up");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

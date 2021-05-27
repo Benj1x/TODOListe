@@ -51,7 +51,7 @@ public class InvitationVindue extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(425, 300));
         setResizable(false);
 
-        jLabel1.setText("Dine hold invitationer:");
+        jLabel1.setText("Your team invites:");
 
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -72,7 +72,7 @@ public class InvitationVindue extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jPanel1);
 
         inviteStatus.setForeground(new java.awt.Color(0, 255, 0));
-        inviteStatus.setText("Invitationen blev accepteret!");
+        inviteStatus.setText("Invitation was accepted!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,10 +144,10 @@ public class InvitationVindue extends javax.swing.JFrame {
     @param inviteID,
     */
     public static void setInvites(String inviteID, String teamID, String username, String teamName){
-        JButton accept = new JButton("Accepter");
-        JButton deny = new JButton("Afvis");
-        JLabel teamLbl = new JLabel("Hold: " + teamName);
-        JLabel userLbl = new JLabel("Fra: " + username);
+        JButton accept = new JButton("Accept");
+        JButton deny = new JButton("Deny");
+        JLabel teamLbl = new JLabel("Team: " + teamName);
+        JLabel userLbl = new JLabel("From: " + username);
         
         accept.setName(teamID);
         deny.setName(teamID);
@@ -165,7 +165,7 @@ public class InvitationVindue extends javax.swing.JFrame {
             {
                 try{
                     JDBC.acceptedInvite(accept.getName());
-                    inviteStatus.setText("Invitationen blev accepteret!");
+                    inviteStatus.setText("Invite was accepted!");
                     inviteStatus.setForeground(Color.GREEN);
                     inviteStatus.setVisible(true);
                     InvitationVindue.inviteHandler();
@@ -193,7 +193,7 @@ public class InvitationVindue extends javax.swing.JFrame {
             {
                 try{
                     JDBC.deleteInvite(deny.getName());
-                    inviteStatus.setText("Invitationen blev slettet!");
+                    inviteStatus.setText("Invite was deleted!");
                     inviteStatus.setForeground(Color.RED);
                     inviteStatus.setVisible(true);
                     InvitationVindue.inviteHandler();

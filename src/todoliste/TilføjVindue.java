@@ -67,11 +67,11 @@ public class TilføjVindue extends javax.swing.JFrame {
         getContentPane().add(startTime);
         startTime.setBounds(162, 134, 119, 20);
 
-        jLabel1.setText("Start Tid:");
+        jLabel1.setText("Start time:");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(88, 137, 70, 14);
 
-        jLabel2.setText("Slut Tid:");
+        jLabel2.setText("End time:");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(88, 175, 70, 14);
 
@@ -84,7 +84,7 @@ public class TilføjVindue extends javax.swing.JFrame {
         getContentPane().add(endTime);
         endTime.setBounds(162, 172, 119, 20);
 
-        jLabel3.setText("Opgave titel:");
+        jLabel3.setText("Task name:");
         getContentPane().add(jLabel3);
         jLabel3.setBounds(78, 99, 80, 14);
 
@@ -97,7 +97,7 @@ public class TilføjVindue extends javax.swing.JFrame {
         getContentPane().add(taskName);
         taskName.setBounds(162, 96, 119, 20);
 
-        jButton1.setText("Tilføj");
+        jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -106,7 +106,7 @@ public class TilføjVindue extends javax.swing.JFrame {
         getContentPane().add(jButton1);
         jButton1.setBounds(320, 266, 80, 23);
 
-        jButton2.setText("Annuller");
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -126,25 +126,25 @@ public class TilføjVindue extends javax.swing.JFrame {
 
         dateError.setForeground(new java.awt.Color(255, 0, 0));
         dateError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dateError.setText("Ugyldig dato!");
+        dateError.setText("Illegal date!");
         getContentPane().add(dateError);
         dateError.setBounds(144, 40, 130, 14);
 
         taskNameError.setForeground(new java.awt.Color(255, 0, 0));
         taskNameError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        taskNameError.setText("Ugyldigt opgave navn!");
+        taskNameError.setText("Illegal task name!");
         getContentPane().add(taskNameError);
         taskNameError.setBounds(144, 80, 160, 14);
 
         startTimeError.setForeground(new java.awt.Color(255, 0, 0));
         startTimeError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        startTimeError.setText("Ugyldigt start tidspunkt!");
+        startTimeError.setText("Illegal start time!");
         getContentPane().add(startTimeError);
         startTimeError.setBounds(144, 120, 160, 14);
 
         endTimeError.setForeground(new java.awt.Color(255, 0, 0));
         endTimeError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        endTimeError.setText("Ugylidigt slut tidspunkt!");
+        endTimeError.setText("Illegal end time!");
         getContentPane().add(endTimeError);
         endTimeError.setBounds(134, 160, 180, 14);
 

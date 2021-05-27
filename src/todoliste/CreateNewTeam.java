@@ -49,7 +49,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        teamName.setText("Hold navn eksempel");
+        teamName.setText("A team name");
         teamName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 teamNameActionPerformed(evt);
@@ -59,31 +59,31 @@ public class CreateNewTeam extends javax.swing.JFrame {
         teamName.setBounds(21, 50, 120, 30);
 
         lblTeamName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTeamName.setText("Hold navn:");
+        lblTeamName.setText("Team name:");
         getContentPane().add(lblTeamName);
         lblTeamName.setBounds(1, 30, 160, 14);
 
-        createTeam.setText("Lav hold");
+        createTeam.setText("Create team");
         createTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createTeamActionPerformed(evt);
             }
         });
         getContentPane().add(createTeam);
-        createTeam.setBounds(30, 90, 101, 23);
+        createTeam.setBounds(21, 90, 120, 23);
 
-        cancel.setText("Fortryd");
+        cancel.setText("Cancel");
         cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelActionPerformed(evt);
             }
         });
         getContentPane().add(cancel);
-        cancel.setBounds(30, 120, 101, 23);
+        cancel.setBounds(21, 120, 120, 23);
 
         creationStatus.setForeground(new java.awt.Color(255, 0, 0));
         creationStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        creationStatus.setText("Ugyldigt hold navn!");
+        creationStatus.setText("Illegal team name!");
         getContentPane().add(creationStatus);
         creationStatus.setBounds(1, 16, 160, 14);
 
@@ -94,7 +94,7 @@ public class CreateNewTeam extends javax.swing.JFrame {
         if (teamName.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
             try{
                    JDBC.createTeam(teamName.getText());
-                   creationStatus.setText("Holdet blev lavet!");
+                   creationStatus.setText("Team created!");
                     creationStatus.setForeground(Color.green);
                     creationStatus.setVisible(true);
             }
@@ -106,11 +106,11 @@ public class CreateNewTeam extends javax.swing.JFrame {
                 login.setVisible(true);
             }
             catch(Exception e){
-                System.out.println("Fejl i invitation af bruger");
+                System.out.println("Fejl i skabelse af hold");
             }
         }
         else{
-            creationStatus.setText("Ugyldigt hold navn!");
+            creationStatus.setText("Illegal team name!");
             creationStatus.setForeground(Color.red);
             creationStatus.setVisible(true);
         }// TODO add your handling code here:
