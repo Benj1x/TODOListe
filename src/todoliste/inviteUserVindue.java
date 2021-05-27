@@ -5,6 +5,10 @@
  */
 package todoliste;
 
+import com.mysql.cj.exceptions.CJCommunicationsException;
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+import static todoliste.JDBC.isOnline;
+
 /**
  *
  * @author Benjamin
@@ -23,6 +27,13 @@ public class inviteUserVindue extends javax.swing.JFrame {
             for (Object i : JDBC.getUserTeams().keySet()) {
                 jComboBox2.addItem(JDBC.getUserTeams().get(i).toString() + ", " + i);
             }
+        }
+        catch(CommunicationsException e){
+         System.out.println("JDBC er offline");
+         isOnline = false;
+         Hovedvindue.closeWindows();
+         LoginVindue login = new LoginVindue();
+         login.setVisible(true);
         }
         catch(Exception e){
             System.out.println("Fejl i hentning af hold!");
@@ -116,9 +127,15 @@ public class inviteUserVindue extends javax.swing.JFrame {
                 inviteStatus.setText("Brugeren eksistere ikke!");
             }
         }
+        catch(CJCommunicationsException e){
+         System.out.println("JDBC er offline");
+         isOnline = false;
+         Hovedvindue.closeWindows();
+         LoginVindue login = new LoginVindue();
+         login.setVisible(true);
+        }
         catch(Exception e){
             System.out.println("Fejl i invitation af bruger");
-            e.printStackTrace();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

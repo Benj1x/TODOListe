@@ -5,6 +5,7 @@
  */
 package todoliste;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,6 +30,7 @@ public class JDBC{
     public static String GlobalUserID;
     public static ArrayList<String> inviteIDs = new ArrayList<String>();
     public static String selDate;
+    public static boolean isOnline;
     
     /**
    * load metoden bruges til at indlæse JDBC driveren
@@ -42,12 +44,13 @@ public class JDBC{
          Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
          
          con.close();     
+         isOnline = true;
      }
-     
-     catch(Exception e){
-         System.out.println(e);
-         e.printStackTrace();
+     catch(CommunicationsException e){
          System.out.println("JDBC er offline");
+         isOnline = false;
+     } catch(ClassNotFoundException e){
+         System.out.println("Uhåndteret fejl i JDBC load!\n"+e);
      }
      
     }
@@ -368,12 +371,7 @@ public class JDBC{
 
         
         while(rs.next()){
-             //System.out.println("Username: " + rs.getString(1));
-             //System.out.println("Connection table ID: " + rs.getString(2));
-             //System.out.println("UserID: " + rs.getString(3));
-             //System.out.println("Team ID: " + rs.getString(4));
              TeamInfo.put(rs.getString(4),rs.getString(5));
-             
          
         }
        con.close(); 

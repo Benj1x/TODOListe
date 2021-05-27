@@ -6,6 +6,7 @@
 package todoliste;
 
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,6 +26,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.SpringLayout;
+import static todoliste.JDBC.isOnline;
 
 
 /**
@@ -66,7 +68,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         }
         catch(Exception e){
             //System.out.println("Something went wrong when adding teams to the combobox");
-            e.getStackTrace();
+            e.printStackTrace();
         }
         
         
@@ -107,8 +109,15 @@ public class Hovedvindue extends javax.swing.JFrame{
                     indexCorr = indexCorr + 4;      
                 }
             }
+            catch(CommunicationsException e){
+                System.out.println("JDBC er offline");
+                isOnline = false;
+                Hovedvindue.closeWindows();
+                LoginVindue login = new LoginVindue();
+                login.setVisible(true);
+            }
             catch(Exception e){
-                e.printStackTrace();
+                System.out.println("Fejl i henting af opgaver");
             }
         }
         else{
@@ -123,11 +132,16 @@ public class Hovedvindue extends javax.swing.JFrame{
                 }
                 //JDBC.getTeamTasks(ArrOfTeamID[1]);
             }
-            catch(Exception e){
-                e.getStackTrace();
+            catch(CommunicationsException e){
+                System.out.println("JDBC er offline");
+                isOnline = false;
+                Hovedvindue.closeWindows();
+                LoginVindue login = new LoginVindue();
+                login.setVisible(true);
             }
-            //return true;
-            //return false;
+            catch(Exception e){
+                System.out.println("Fejl i henting af opgaver");
+            }
         }
     }
     
@@ -228,6 +242,11 @@ public class Hovedvindue extends javax.swing.JFrame{
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jComboBox1ItemStateChanged(evt);
+            }
+        });
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
             }
         });
 
@@ -638,13 +657,7 @@ public class Hovedvindue extends javax.swing.JFrame{
             jLabel4.setText(SDF.format(calendar.getTime()).toString());
             
             JDBC.selDate = jLabel4.getText();
-            try{
-                taskHandler();
-            } catch(Exception e){
-                
-            }
-            
-
+            taskHandler();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     /*
@@ -661,8 +674,10 @@ public class Hovedvindue extends javax.swing.JFrame{
           JDBC.inviteIDs.clear();
           
         }
-        catch(Exception e) {
-            e.printStackTrace();
+        catch(CommunicationsException e){
+         isOnline = false;
+        } catch(Exception ex){
+         System.out.println("Uhåndteret fejl i JDBC load!\n"+ex);
         }
         closeWindows();
         LoginVindue login = new LoginVindue();
@@ -674,7 +689,7 @@ public class Hovedvindue extends javax.swing.JFrame{
     *vinduerne ved hjælp af java.awt.Window, med dette kan vi loope igennem de 
     *aktive vinduer.
     */
-    private void closeWindows(){
+    public static void closeWindows(){
         for (java.awt.Window window : java.awt.Window.getWindows()) {
             window.dispose();
         }
@@ -735,6 +750,10 @@ public class Hovedvindue extends javax.swing.JFrame{
         inviteUserVindue InviteUserVindue = new inviteUserVindue();
         InviteUserVindue.setVisible((true));
     }//GEN-LAST:event_inviteUserActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     public static ArrayList<JButton> buttons = new ArrayList<>();
     public static boolean hasRun = false;

@@ -5,12 +5,14 @@
  */
 package todoliste;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
+import static todoliste.JDBC.isOnline;
 
 /**
  *
@@ -120,6 +122,13 @@ public class InvitationVindue extends javax.swing.JFrame {
                 indexCorr = indexCorr + 5;
             }
         }
+        catch(CommunicationsException e){
+            System.out.println("JDBC er offline");
+            isOnline = false;
+            Hovedvindue.closeWindows();
+            LoginVindue login = new LoginVindue();
+            login.setVisible(true);
+        }
         catch(Exception e){
             System.out.println("Fejl i inviteHandler");
             e.printStackTrace();
@@ -165,6 +174,13 @@ public class InvitationVindue extends javax.swing.JFrame {
                     }
                     
                 }
+                catch(CommunicationsException ex){
+                    System.out.println("JDBC er offline");
+                    isOnline = false;
+                    Hovedvindue.closeWindows();
+                    LoginVindue login = new LoginVindue();
+                    login.setVisible(true);
+                }
                 catch(Exception ex){
                     System.out.println("Fejl i tilføjelse af accepter knap");
                     ex.printStackTrace();
@@ -181,6 +197,13 @@ public class InvitationVindue extends javax.swing.JFrame {
                     inviteStatus.setForeground(Color.RED);
                     inviteStatus.setVisible(true);
                     InvitationVindue.inviteHandler();
+                }
+                catch(CommunicationsException ex){
+                    System.out.println("JDBC er offline");
+                    isOnline = false;
+                    Hovedvindue.closeWindows();
+                    LoginVindue login = new LoginVindue();
+                    login.setVisible(true);
                 }
                 catch(Exception ex){
                     System.out.println("Fejl i tilføjelse af deny knap");

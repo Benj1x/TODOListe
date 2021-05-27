@@ -5,9 +5,11 @@
  */
 package todoliste;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
+import static todoliste.JDBC.isOnline;
 
 /**
  *
@@ -164,7 +166,6 @@ public class TilføjVindue extends javax.swing.JFrame {
             if (taskName.getText().matches("[0-9a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
                 if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
                     try{
-                        System.out.println(date.getText()+"\n"+taskName.getText()+"\n"+startTime.getText()+"\n"+endTime.getText());
                         JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
                         if(Hovedvindue.jComboBox1.getSelectedItem() == "Min liste"){
                             JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
@@ -175,9 +176,15 @@ public class TilføjVindue extends javax.swing.JFrame {
                             JDBC.addTeamTask(ArrOfTeamID[1], date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
                             Hovedvindue.taskHandler();
                         }
+                    }catch(CommunicationsException e){
+                        System.out.println("JDBC er offline");
+                        isOnline = false;
+                        Hovedvindue.closeWindows();
+                        LoginVindue login = new LoginVindue();
+                        login.setVisible(true);
                     }
                     catch(Exception e){
-                        e.printStackTrace();
+                        System.out.println("Fejl i invitation af bruger");
                     }
                 }
                 else{

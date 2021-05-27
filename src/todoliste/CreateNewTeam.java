@@ -5,7 +5,9 @@
  */
 package todoliste;
 
+import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import java.awt.Color;
+import static todoliste.JDBC.isOnline;
 
 /**
  *
@@ -96,8 +98,15 @@ public class CreateNewTeam extends javax.swing.JFrame {
                     creationStatus.setForeground(Color.green);
                     creationStatus.setVisible(true);
             }
+            catch(CommunicationsException e){
+                System.out.println("JDBC er offline");
+                isOnline = false;
+                Hovedvindue.closeWindows();
+                LoginVindue login = new LoginVindue();
+                login.setVisible(true);
+            }
             catch(Exception e){
-                e.printStackTrace();
+                System.out.println("Fejl i invitation af bruger");
             }
         }
         else{

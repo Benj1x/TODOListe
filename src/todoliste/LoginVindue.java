@@ -18,6 +18,7 @@ public class LoginVindue extends javax.swing.JFrame {
     public LoginVindue() {
         initComponents();
         loginError.setVisible(false);
+        onlineStatus.setVisible(false);
     }
 
     /**
@@ -37,6 +38,7 @@ public class LoginVindue extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         loginError = new javax.swing.JLabel();
+        onlineStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -111,6 +113,10 @@ public class LoginVindue extends javax.swing.JFrame {
         getContentPane().add(loginError);
         loginError.setBounds(80, 200, 190, 14);
 
+        onlineStatus.setText("Programmet er offline!");
+        getContentPane().add(onlineStatus);
+        onlineStatus.setBounds(104, 50, 150, 14);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,41 +127,47 @@ public class LoginVindue extends javax.swing.JFrame {
     *Password må indeholde alle latniske bogstaver + danske.
     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$") 
-                && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
-            try{
-                if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
-                    emailFieldText = emailField.getText();
-                    Hovedvindue hovedvindue = new Hovedvindue();
-                    hovedvindue.setVisible(true);
-                    //Hovedvindue.setTaskButton(JDBC.getTasks().get(0).toString(),JDBC.getTasks().get(1).toString(),JDBC.getTasks().get(2).toString());
-                    
-                    Hovedvindue.taskHandler();
-                    
-                    this.dispose();
-                }
-                else{
-                loginError.setVisible(true);
-                }
-            //JDBC.signIn(emailField.getText());
-            //System.out.println(JDBC.password);
-            }
-            catch(Exception e){
-                System.out.print("Exception i Login Vinduet");
-                e.printStackTrace();
+    try{
+        JDBC.load();
+        if (JDBC.isOnline){
+            if (emailField.getText().matches("[A-Za-z0-9+.-]+@[A-Za-z0-9.-]+$")
+                    && jPasswordField1.getText().matches("[A-Za-z0-9+$&+,:=?@#|<>.^*\\s/%!\\-_()¤ÆØÅæøå/¨]+$")){
+                    if(JDBC.signIn(emailField.getText(), jPasswordField1.getText()) == true){
+                        emailFieldText = emailField.getText();
+                        Hovedvindue hovedvindue = new Hovedvindue();
+                        hovedvindue.setVisible(true);
+                        Hovedvindue.taskHandler();
+                        this.dispose();
+                    }
+                    else{
+                        loginError.setVisible(true);
+                    }
             }
         }
         else{
-            //Ugyldigt bruger navn eller password
+            onlineStatus.setVisible(true);
         }
+    }
+    catch(Exception e){
+        System.out.print("Exception i Login Vinduet");
         
+    } 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        RegistrerVindue registrervindue = new RegistrerVindue();
-        registrervindue.setVisible(true);
-        this.dispose();
+        try{
+            if(JDBC.isOnline){
+                RegistrerVindue registrervindue = new RegistrerVindue();
+                registrervindue.setVisible(true);
+                this.dispose();
+            }
+            else{
+                onlineStatus.setVisible(true);
+            }
+        }catch(Exception e){
+            System.out.print("Exception i Login Vinduet");
+        }
+        
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
@@ -249,5 +261,6 @@ public class LoginVindue extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel loginError;
+    private javax.swing.JLabel onlineStatus;
     // End of variables declaration//GEN-END:variables
 }
