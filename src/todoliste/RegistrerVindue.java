@@ -98,7 +98,7 @@ public class RegistrerVindue extends javax.swing.JFrame {
         getContentPane().add(usernameField);
         usernameField.setBounds(100, 40, 250, 30);
 
-        jButton1.setText("Registrer");
+        jButton1.setText("Sign-up");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -205,7 +205,9 @@ public class RegistrerVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        
+        LoginVindue login = new LoginVindue();
+        login.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed

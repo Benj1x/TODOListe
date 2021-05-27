@@ -54,7 +54,7 @@ public class LoginVindue extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jButton1.setText("Login");
+        jButton1.setText("Sign-in");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
