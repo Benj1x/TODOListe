@@ -166,7 +166,6 @@ public class TilføjVindue extends javax.swing.JFrame {
             if (taskName.getText().matches("[0-9a-zA-ZæøåØÅÆ\\.\\-\\/\\s]+")){
                 if (startTime.getText().matches(timeReg) && endTime.getText().matches(timeReg)){
                     try{
-                        JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
                         if(Hovedvindue.jComboBox1.getSelectedItem() == "Min liste"){
                             JDBC.addTask(date.getText(), taskName.getText(), startTime.getText(), endTime.getText());
                             Hovedvindue.taskHandler();
@@ -184,7 +183,7 @@ public class TilføjVindue extends javax.swing.JFrame {
                         login.setVisible(true);
                     }
                     catch(Exception e){
-                        System.out.println("Fejl i invitation af bruger");
+                        System.out.println("Fejl i skabelse af opgave");
                     }
                 }
                 else{

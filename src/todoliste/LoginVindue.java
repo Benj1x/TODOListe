@@ -155,7 +155,9 @@ public class LoginVindue extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+
         try{
+            JDBC.load();
             if(JDBC.isOnline){
                 RegistrerVindue registrervindue = new RegistrerVindue();
                 registrervindue.setVisible(true);
