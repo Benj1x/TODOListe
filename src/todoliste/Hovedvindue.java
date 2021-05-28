@@ -127,7 +127,7 @@ public class Hovedvindue extends javax.swing.JFrame{
                 for(int j = 0; j < teamAmount; j++){
                     
                     setTaskButton(JDBC.getTeamTasks(ArrOfTeamID[1]).get(indexCorr).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(indexCorr+1).toString(), JDBC.getTeamTasks(ArrOfTeamID[1]).get(indexCorr+2).toString(), true, JDBC.getTeamTasks(ArrOfTeamID[1]).get(indexCorr+3).toString());
-                        //System.out.println(JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+4).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+5).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+6).toString() + JDBC.getTeamTasks(ArrOfTeamID[1]).get(j+7).toString());
+                        
                     indexCorr = indexCorr + 4;
                 }
                 //JDBC.getTeamTasks(ArrOfTeamID[1]);
@@ -672,7 +672,7 @@ public class Hovedvindue extends javax.swing.JFrame{
         try{
           JDBC.getTasks().clear();
           JDBC.inviteIDs.clear();
-          
+          JDBC.signOut();
         }
         catch(CommunicationsException e){
          isOnline = false;
@@ -680,6 +680,7 @@ public class Hovedvindue extends javax.swing.JFrame{
          System.out.println("Uhåndteret fejl i JDBC load!\n"+ex);
         }
         closeWindows();
+        
         LoginVindue login = new LoginVindue();
         login.setVisible(true);
     }//GEN-LAST:event_signOutActionPerformed
@@ -822,6 +823,9 @@ public class Hovedvindue extends javax.swing.JFrame{
         double getTimeBetween = endTimeInPixel - startTimeInPixel;
         int m_getTimeBetween = (int) getTimeBetween;
 
+        
+        //Inden en knap tilføjes, tilføjes en actionListener til knappen. 
+        //Kilde: https://stackoverflow.com/a/27840774
         JButton button=new JButton(taskName);
         //Adds action event to all butons generated
         try{
@@ -839,7 +843,7 @@ public class Hovedvindue extends javax.swing.JFrame{
             System.out.println("Fejl i henting af opgave ID");
         }
         
-        //kilde: https://stackoverflow.com/a/27840774
+
         //Inden en knap tilføjes, tilføjes en actionListener til knappen.
         button.addActionListener(new ActionListener(){
         /*
