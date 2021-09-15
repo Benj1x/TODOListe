@@ -142,6 +142,8 @@ public class LoginVindue extends javax.swing.JFrame {
                     else{
                         loginError.setVisible(true);
                     }
+            }else{
+                loginError.setVisible(true);
             }
         }
         else{

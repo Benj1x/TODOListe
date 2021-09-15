@@ -22,9 +22,6 @@ import java.util.HashMap;
  * @author Benjamin O. Høj
  * 
  */
-//https://www.youtube.com/watch?v=3OrEsC-QjUA
-    //https://www.youtube.com/watch?v=wR0jg0eQsZA
-    //https://lucid.app/lucidchart/e53e4a47-b977-4c5a-a9ac-bafe41dcdf88/edit?beaconFlowId=F42B643A674C6E9F&page=0_0#
 
 public class JDBC{
     
@@ -52,6 +49,7 @@ public class JDBC{
          isOnline = false;
      }
     }
+    
     public static void signOut() throws SQLException{
         con.close();
     }
@@ -178,9 +176,7 @@ public class JDBC{
     
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
         load();
-        //on user login get userID and save it for use in "userID" fields.
         Statement stmt = con.createStatement();
-        //This works, rev 1
         ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE users.Email = '" + loginEmail + "'");
         
         String userID = "";
