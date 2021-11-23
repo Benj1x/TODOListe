@@ -1,6 +1,6 @@
 # TODOListe
 
-##**Programmet mangler stadig noget beautification, og databasen til programmet er ikke på github pt.**##
+## Programmet mangler stadig noget beautification, og databasen til programmet er ikke på github pt.
 
 Et Java program der ved hjælp af sin database kan visualisere dagens gøre mål for sine brugere.
 For at bruge programmet, opretter man en bruger, vælger en dag, og tilføjere alt man skal nå i løbet af dagen.
