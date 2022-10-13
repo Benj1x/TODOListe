@@ -159,7 +159,7 @@ public class JDBC{
     public static void deleteTeamTask(String TeamID, String TaskID) throws SQLException{
         Connection con = DriverManager.getConnection("jdbc:mysql://ams3.bisecthosting.com/mc80116","mc80116","9c8c12a856");
         Statement stmt = con.createStatement();
-        //Skal rettes til når GUI er mere klar
+
         stmt.executeUpdate("DELETE FROM todolists WHERE Team_ID = '" + TeamID + "' AND List_ID = '" + TaskID + "'");
 
         stmt.close();
@@ -170,8 +170,7 @@ public class JDBC{
         stmt.executeUpdate("DELETE FROM invites WHERE invited_User_ID = '" + GlobalUserID + "' AND team_ID = '" + teamID + "'");
 
         stmt.close();
-        //Skal rettes til når GUI er mere klar
-        //Feedback bruger med "Invitation til hold 'holdnavn' er blevet slettet
+
     }
     
     public static boolean signIn(String loginEmail, String loginPassword) throws SQLException{
