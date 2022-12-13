@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTextArea cache="true" cacheHint="QUALITY" editable="false" focusColor="WHITE" layoutX="20.0" layoutY="70.0" prefHeight="36.0" prefWidth="61.0" text="Email:" unFocusColor="WHITE" />
+      <JFXTextArea cache="true" cacheHint="QUALITY" editable="false" focusColor="WHITE" layoutX="20.0" layoutY="120.0" prefHeight="36.0" prefWidth="61.0" text="Password:" unFocusColor="WHITE" />
+      <JFXTextArea focusColor="WHITE" layoutX="100.0" layoutY="70.0" prefHeight="34.0" prefWidth="463.0" promptText="Your email:" unFocusColor="WHITE" />
+      <JFXTextArea fx:id="password" focusColor="WHITE" layoutX="100.0" layoutY="120.0" prefHeight="34.0" prefWidth="463.0" promptText="Your password:" unFocusColor="WHITE" />
+      <JFXButton buttonType="RAISED" layoutX="120.0" layoutY="170.0" text="Login" />
+      <JFXTextArea cache="true" cacheHint="QUALITY" editable="false" focusColor="WHITE" layoutX="80.0" layoutY="200.0" prefHeight="36.0" prefWidth="182.0" text="Brugernavn eller kodeord forker!" unFocusColor="WHITE" />
+      <JFXTextArea cache="true" cacheHint="QUALITY" editable="false" focusColor="WHITE" layoutX="50.0" layoutY="240.0" onMouseClicked="#DoCodeHere" prefHeight="36.0" prefWidth="208.0" text="Har du ikke en bruger? Opret dig her!" unFocusColor="WHITE" />
+   </children>
+</Pane>
